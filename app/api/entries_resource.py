@@ -7,7 +7,10 @@ parser.add_argument('title', type=str, required=True,
 parser.add_argument('description', type=str, required=True,
                     help='Description must be a valid string')
 
-entries_list = []
+entries_list = [{'entry_id': 1,
+            'title': 'Go cycling',
+            'description': 'I love cycling'}
+            ]
 
 class EntryResource(Resource):
     def get(self, entry_id):
