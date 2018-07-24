@@ -1,11 +1,8 @@
 import unittest
 import json
 from app import app
+from app.api.entries_resource import entries_list
 
-entries_list = [{'entry_id': 1,
-            'title': 'Go cycling',
-            'description': 'I love cycling'}
-            ]
 
 class EntriesApiTestCase(unittest.TestCase):
 
@@ -22,24 +19,10 @@ class EntriesApiTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
 
-    def test_edit_entry(self,entry_id):
-        new_entry = {
-            'title': 'Read a book',
-            'description': 'Read atleast 10 pages today'
-        }        
-        response = self.app.put("/api/v1/entries/1",\
-        data=json.dumps(new_entry), content_type='application/json')
-        self.assertEqual(response.status_code, 200)
-
-
-    def test_get_an_entry(self):
-        response = self.app.get('/api/v1/entries/1', content_type = 'application/json')
-        self.assertEqual(response.status_code, 200)
-
-
     def test_get_all_entries(self):
         response = self.app.get('/api/v1/entries', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
+
 
     def test_add_entry_with_duplicated_title(self):
         entry1 = {
@@ -80,7 +63,13 @@ class EntriesApiTestCase(unittest.TestCase):
         data=json.dumps(entry), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
-    def test_delete_entry(self,entry_id):        
+    def test_delete_entry(self):  
+        entry = {
+            'title': ' Live band',
+            'description': 'At Kyadondo'
+        }
+        self.app.post("/api/v1/entries",\
+        data=json.dumps(entry), content_type='application/json')      
         response = self.app.delete('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
         
