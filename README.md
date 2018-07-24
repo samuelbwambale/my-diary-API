@@ -12,7 +12,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
   
 | EndPoint                                      	| Functionality                                    |
-| ----------------------------------------------	| ------------------------------------------------ |
+| -----------------------------------------------------	| ------------------------------------------------ |
 | [GET /entries ](#)                            	| Fetch all entries                                |
 | [GET /entries/<entryId>](#)                   	| Fetch single entry			           |
 | [POST /entries](#)                     		| Create an entry	                           |
@@ -35,8 +35,9 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 * Install [Python](https://www.python.org/downloads/)
 * Run `pip install virtualenv` on command prompt
-* Run `pip install virtualenvwrapper-win` on command prompt
-* Run `set WORKON_HOME=%USERPROFILES%\Envs` on command prompt
+* Run `pip install virtualenvwrapper` on command prompt
+* Run `export WORKON_HOME=~/Envs` on command prompt
+* Run `source /usr/local/bin/virtualenvwrapper.sh` on command prompt
 
 ## Setup
 
