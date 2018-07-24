@@ -1,4 +1,6 @@
-# My_Diary
+[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=master)](https://coveralls.io/github/samuelbwambale/my_diary?branch=master)
+
+# My Diary
 
 MyDiary is an online journal where users can pen down their thoughts and feelings. 
 
