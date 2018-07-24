@@ -11,12 +11,12 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 4. Users can add or modify an entry. 
 
   
-| EndPoint                                      | Functionality                                    |
-| ----------------------------------------------| ------------------------------------------------ |
-| [GET /entries ](#)                            | Fetch all entries                                |
-| [GET /entries/<entryId>](#)                   | Fetch single entry			           |
-| [POST /entries](#)                     	| Create an entry	                           |
-| [PUT  /entries/<entryId>](#)                  | Modify an entry 		                   |
+| EndPoint                                      	| Functionality                                    |
+| ----------------------------------------------	| ------------------------------------------------ |
+| [GET /entries ](#)                            	| Fetch all entries                                |
+| [GET /entries/<entryId>](#)                   	| Fetch single entry			           |
+| [POST /entries](#)                     		| Create an entry	                           |
+| [PUT  /entries/<entryId>](#)                  	| Modify an entry 		                   |
 
 
 ### Prerequisites
