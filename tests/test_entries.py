@@ -9,6 +9,11 @@ class EntriesApiTestCase(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
 
+
+    def tearDown(self):
+        del entries_list[:]
+
+
     def test_add_an_entry(self):
         entry = {
             'title': 'Go for a meeting',
@@ -94,7 +99,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'title': 'Hunting',
             'description': 'In the park'
         }        
-        response = self.app.put("/api/v1/entries/2",\
+        response = self.app.put("/api/v1/entries/1",\
         data=json.dumps(new_entry), content_type='application/json')
         self.assertEqual(response.status_code, 200)       
 
@@ -106,7 +111,7 @@ class EntriesApiTestCase(unittest.TestCase):
         }
         self.app.post("/api/v1/entries",\
         data=json.dumps(entry), content_type='application/json')
-        response = self.app.get('/api/v1/entries/2', content_type = 'application/json')
+        response = self.app.get('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
     
