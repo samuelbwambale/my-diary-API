@@ -2,8 +2,6 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLANGE-TWO)](https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLANGE-TWO)
 
-https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLANGE-TWO(Coverage Status)!:https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLANGE-TWO
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/664c55f5d7a35cfc08e4/maintainability)](https://codeclimate.com/github/samuelbwambale/my_diary/maintainability)
 
 # My Diary
