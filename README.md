@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/samuelbwambale/my_diary.svg?branch=CHALLANGE-TWO)](https://travis-ci.com/samuelbwambale/my_diary)
-
-[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLANGE-TWO)](https://coveralls.io/github/samuelbwambale/my_diary?branch=master)
+[![Build Status](https://travis-ci.com/samuelbwambale/my_diary.svg?branch=CHALLANGE-TWO)](https://travis-ci.com/samuelbwambale/my_diary)[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLANGE-TWO)](https://coveralls.io/github/samuelbwambale/my_diary?branch=master)
 
 # My Diary
 
