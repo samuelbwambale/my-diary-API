@@ -10,20 +10,20 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 3. Users can view the contents of a diary entry. 
 4. Users can add or modify an entry. 
 
+### Supported endpoints
   
-| EndPoint                                      	| Functionality                                    |
-| -----------------------------------------------------	| ------------------------------------------------ |
-| [GET /entries ](#)                            	| Fetch all entries                                |
-| [GET /entries/<entryId>](#)                   	| Fetch single entry			           |
-| [POST /entries](#)                     		| Create an entry	                           |
-| [PUT  /entries/<entryId>](#)                  	| Modify an entry 		                   |
+| EndPoint                                      		| Functionality                                   |
+| --------------------------------------------------------------|------------------------------------------------ |
+| [GET /entries ](#)                            		| Fetch all entries                               |
+| [GET /entries/<entryId>](#)                   		| Fetch single entry			          |
+| [POST /entries](#)                     			| Create an entry	                          |
+| [PUT  /entries/<entryId>](#)                  		| Modify an entry 		                  |
 
 
 ### Prerequisites
   1.	HTML/CSS
   2.	Javascript/ES6
   3.	Python/Flask
-
 
 ## Technologies
 
@@ -46,9 +46,14 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 * Run `workon venv` on command prompt
 * Run `pip freeze > requirements.txt` on command prompt
 * Run `export FLASK_APP=app.py` on command prompt
+
+## Tests
+
+* Run `python app.py test` on command prompt
+
+## Run the app
 * Run `python app.py runserver` on command prompt
 * View the app on `http://127.0.0.1:5000/`
-
 
 ### GitHub pages
 
