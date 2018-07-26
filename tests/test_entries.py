@@ -124,8 +124,4 @@ class EntriesApiTestCase(unittest.TestCase):
         data=json.dumps(entry), content_type='application/json')      
         response = self.app.delete('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
-
-
-
-
-        
+                
