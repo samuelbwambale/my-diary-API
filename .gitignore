@@ -7,6 +7,7 @@ __pycache__
 
 # Environments
 my-venv
+env/
 
 .vscode
 *.pyc
