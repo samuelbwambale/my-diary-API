@@ -7,8 +7,13 @@ api = Api(apiv1)
 
 from .entries_resource import EntryListResource
 from .entries_resource import EntryResource
-#GET all entries or POST an entry
 api.add_resource(EntryListResource,'/entries')
-#GET or PUT or DELETE an entry
 api.add_resource(EntryResource,'/entries/<int:entry_id>')
+
+from .users_resource import UserListResource
+from .users_resource import UserRegister
+from .users_resource import UserLogin
+api.add_resource(UserListResource,'/users')
+api.add_resource(UserRegister,'/auth/signup')
+api.add_resource(UserLogin,'/auth/login')
 
