@@ -3,7 +3,6 @@ aniso8601==3.0.0
 asn1crypto==0.24.0
 astroid==1.6.3
 attrs==17.4.0
-backports.functools-lru-cache==1.5
 caniusepython3==7.0.0
 certifi==2018.4.16
 cffi==1.11.5
@@ -26,9 +25,6 @@ Flask-RESTful==0.3.6
 flask-restplus==0.10.1
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
-funcsigs==1.0.2
-functools32==3.2.3.post2
-futures==3.2.0
 gunicorn==19.8.0
 idna==2.6
 ipaddress==1.0.22
