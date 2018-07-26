@@ -52,9 +52,15 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 * Run `python app.py test` on command prompt
 
 ## Run the app
+
 * Run `python app.py runserver` on command prompt
 * View the app on `http://127.0.0.1:5000/`
 
 ### GitHub pages
 
 View the userinterface at (https://samuelbwambale.github.io/my_diary/UI/home.html)
+
+### Heroku
+
+The app is accessible on Heroku at (https://sb-my-diary.herokuapp.com/)
+
