@@ -2,11 +2,11 @@ from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 import re
 
-users_list = []
+USERS = []
 
 class UserListResource(Resource):
     def get(self):
-        return make_response(jsonify({'users': users_list}), 200)
+        return make_response(jsonify({'users': USERS}), 200)
 
 
 class UserRegister(Resource):
@@ -21,7 +21,7 @@ class UserRegister(Resource):
         parser.add_argument('password', type=str, required=True,
                     help='Password must be a valid string')
         data = parser.parse_args()
-        for user in users_list:
+        for user in USERS:
             if user['email'] == data['email']:
                 return make_response(
                     jsonify({
@@ -50,14 +50,14 @@ class UserRegister(Resource):
                         {'message': 'Password must be atleast 4 characters in length.',
                         }), 400)
                 user ={
-                    "user_id": len(users_list)+1,
+                    "user_id": len(USERS)+1,
                     "first_name": data['first_name'],
                     "last_name": data['last_name'],
                     "email": data['email'], 
                     "password": data['password'],
                     }
                 try:
-                    users_list.append(user)
+                    USERS.append(user)
                     return make_response(jsonify({
                         'status': "success",
                         'message': 'User Successfully Created!!',
@@ -74,7 +74,7 @@ class UserLogin(Resource):
         parser.add_argument('password', type=str, required=True,
                     help='Password must be a valid string')
         data = parser.parse_args()
-        for user in users_list:
+        for user in USERS:
             if user['email'] == data['email']:
                 if user['password'] == data['password']:
                     return make_response(jsonify({
