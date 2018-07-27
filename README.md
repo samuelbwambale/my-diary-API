@@ -44,7 +44,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 * Run `git clone` this repository and `cd` into the project root.
 * Run `mkvirtualenv venv` on command prompt
 * Run `workon venv` on command prompt
-* Run `pip freeze > requirements.txt` on command prompt
+* Run `pip install freeze > requirements.txt` on command prompt
 
 
 ## Tests
