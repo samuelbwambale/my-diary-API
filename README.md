@@ -27,9 +27,9 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ## Technologies
 
-* Python 2.7 and above
+* Python 3.6 and above
 * Flask Restful
-* Flask Restful plus
+
 
 ## Requirements
 
@@ -41,20 +41,19 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ## Setup
 
+* Run `virtualenv -p python3 env-name` on command prompt
+* Run `workon env-name` on command prompt
 * Run `git clone` this repository and `cd` into the project root.
-* Run `mkvirtualenv venv` on command prompt
-* Run `workon venv` on command prompt
-* Run `pip freeze > requirements.txt` on command prompt
-* Run `export FLASK_APP=app.py` on command prompt
-
-## Tests
-
-* Run `python app.py test` on command prompt
+* Run `pip install -r requirements.txt` on command prompt
 
 ## Run the app
 
 * Run `python app.py runserver` on command prompt
 * View the app on `http://127.0.0.1:5000/`
+
+## Tests
+
+* Run `pytest tests` on command prompt
 
 ### GitHub pages
 

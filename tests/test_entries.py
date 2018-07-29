@@ -1,7 +1,7 @@
 import unittest
 import json
 from app import app
-from app.api.entries_resource import entries_list
+from app.api.entries_resource import ENTRIES
 
 
 class EntriesApiTestCase(unittest.TestCase):
@@ -11,7 +11,7 @@ class EntriesApiTestCase(unittest.TestCase):
 
 
     def tearDown(self):
-        del entries_list[:]
+        del ENTRIES[:]
 
 
     def test_add_an_entry(self):
@@ -88,6 +88,7 @@ class EntriesApiTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     
+    
     def test_edit_entry(self):
         entry = {
             'title': 'Swimming',
@@ -101,7 +102,22 @@ class EntriesApiTestCase(unittest.TestCase):
         }        
         response = self.app.put("/api/v1/entries/1",\
         data=json.dumps(new_entry), content_type='application/json')
-        self.assertEqual(response.status_code, 200)       
+        self.assertEqual(response.status_code, 200) 
+
+    def test_edit_entry_that_does_not_exist(self):
+        entry = {
+            'title': 'Swimming',
+            'description': 'In Munyonyo'
+        }
+        self.app.post("/api/v1/entries",\
+        data=json.dumps(entry), content_type='application/json')
+        new_entry = {
+            'title': 'Hunting',
+            'description': 'In the park'
+        }        
+        response = self.app.put("/api/v1/entries/10",\
+        data=json.dumps(new_entry), content_type='application/json')
+        self.assertEqual(response.status_code, 404)       
 
 
     def test_get_an_entry(self):
@@ -113,6 +129,16 @@ class EntriesApiTestCase(unittest.TestCase):
         data=json.dumps(entry), content_type='application/json')
         response = self.app.get('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
+
+    def test_get_an_entry_not_in_list(self):
+        entry = {
+            'title': ' Visit a Cinema',
+            'description': 'Go to Cineplex'
+        }
+        self.app.post("/api/v1/entries",\
+        data=json.dumps(entry), content_type='application/json')
+        response = self.app.get('/api/v1/entries/10', content_type = 'application/json')
+        self.assertEqual(response.status_code, 404)
 
     
     def test_delete_entry(self):  

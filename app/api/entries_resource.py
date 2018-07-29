@@ -9,19 +9,19 @@ parser.add_argument('description', type=str, required=True,
 
 ENTRIES = []
 
-
 class EntryResource(Resource):
     def get(self, entry_id):
         for entry in ENTRIES:
             if entry['entry_id'] == entry_id:
                 return make_response(jsonify({
-                    'status': 'success',
-                    'entry': entry
+                'status': 'success',
+                'entry': entry
                 }), 200)
         return make_response(jsonify({
-            'status': 'failed',
-            'message': 'Entry with this ID not found.',
-        }), 404)
+                'status': 'failed',
+                'message': 'Entry with this ID not found.',
+                }), 404)            
+
 
     def put(self, entry_id):
         data = parser.parse_args()
@@ -32,25 +32,26 @@ class EntryResource(Resource):
                 return make_response(jsonify({
                     'status': 'success',
                     'message': 'Entry edited successfully.',
-                }), 200)
+                    }), 200)
         return make_response(jsonify({
-            'status': 'failed',
-            'message': 'Entry with this ID not found.',
-        }), 404)
+                'status': 'failed',
+                'message': 'Entry with this ID not found.',
+                }), 404)       
 
+            
     def delete(self, entry_id):
         for entry in ENTRIES:
             if entry['entry_id'] == entry_id:
                 ENTRIES.remove(entry)
                 return make_response(jsonify({
-                    'status': 'success',
-                    'message': 'Entry deleted.'
+                'status': 'success',
+                'message': 'Entry deleted.'
                 }), 200)
         return make_response(jsonify({
-            'status': 'failed',
-            'message': 'Entry with this ID not found.',
-        }), 404)
-
+                'status': 'failed',
+                'message': 'Entry with this ID not found.',
+                }), 404)
+    
 
 class EntryListResource(Resource):
     def get(self):
@@ -69,7 +70,7 @@ class EntryListResource(Resource):
             return make_response(jsonify({
                 'status': 'failed',
                 'message': 'Title should be at least 4 characters long.'}), 400)
-
+            
         if description.strip() == "":
             return make_response(jsonify({
                 'status': 'failed',
@@ -84,18 +85,18 @@ class EntryListResource(Resource):
                 return make_response(jsonify({
                     'status': "Failed",
                     'message': 'Entry with same title already exists!',
-                }), 400)
+                    }), 400)
         entry = {
-            "entry_id": len(ENTRIES)+1,
-            "title": title,
-            "description": description
-        }
+                "entry_id":len(ENTRIES)+1,
+                "title": title,
+                "description": description
+                    }
         try:
             ENTRIES.append(entry)
             return make_response(jsonify({
                 'status': "success",
                 'message': 'Entry successfully created!',
-            }), 201)
+                }), 201)
         except Exception as err:
             return {'message': '{}'.format(err)}, 500
             
