@@ -1,49 +1,20 @@
-import uuid
 import datatime
+from api.database import DatabaseConnection
 
-ENTRIES = []
 
 class Entry:
-    def __init__(self, title, description):
-        self.id = uuid.uuid4().hex
+
+    def __init__(self, title, description, user_id):
         self.title = title
         self.description = description
-        self.created_date = datetime.datetime.utcnow()
+        self.create_date = datetime.datetime.utcnow()
+        self.user_id = user_id
 
 
     def add_entry(self):
-        ENTRIES.append(self)
-
-
-    def update_entry(self, title, description):
-        self.title = title
-        self.description = description
-
-
-    def delete_entry(self):
-        ENTRIES.remove(self)
-
-
-    def json(self):
-        return {
-            'entry_id': self.entry_id,
-            'title': self.title,
-            'description': self.description
-       }
-
-
-def get_entry_by_id(entry_id):
-    for entry in ENTRIES:
-        if entry['entry_id'] == entry_id: 
-            return entry
-
-
-
-def get_entry_by_title(title):
-    for entry in ENTRIES:
-        if entry['title'] == title: 
-            return entry
-
-def get_all_entries():
-    return [entry.json() for entry in ENTRIES]
-            
+        query = "INSERT INTO entries (title, description, create_date, user_id) VALUES (%s, %s, %s)"
+        User.cursor.execute(query,(
+            self.title, 
+            self.description, 
+            self.create_date, 
+            self.user_id))
