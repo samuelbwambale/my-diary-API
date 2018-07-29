@@ -1,18 +1,10 @@
 import unittest
 import json
-from app import app
+from tests.base import BaseTestCase
 from app.api.resources.entries_resource import ENTRIES
 
 
-class EntriesApiTestCase(unittest.TestCase):
-
-    def setUp(self):
-        self.app = app.test_client()
-
-
-    def tearDown(self):
-        del ENTRIES[:]
-
+class EntriesApiTestCase(BaseTestCase):
 
     def test_add_an_entry(self):
         entry = {
@@ -36,8 +28,12 @@ class EntriesApiTestCase(unittest.TestCase):
         }
         self.app.post("/api/v1/entries",\
         data = json.dumps(entry1), content_type='application/json')
+        entry2 = {
+            'title': 'Go to Jinja',
+            'description': 'Today and tomorrow'
+        }
         response = self.app.post("/api/v1/entries",\
-        data = json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry2), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
 
@@ -150,4 +146,18 @@ class EntriesApiTestCase(unittest.TestCase):
         data = json.dumps(entry), content_type='application/json')      
         response = self.app.delete('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
+
+
+class EntriesTableTestCase(BaseTestCase):
+    def test_insert_entry(self):
+        pass
+
+    def test_select_entry(self):
+        pass
+
+    def test_select_entries(self):
+        pass
+
+
+    
                 
