@@ -1,7 +1,7 @@
 import unittest
 import json
 from app import app
-from app.api.entries_resource import ENTRIES
+from app.api.resources.entries_resource import ENTRIES
 
 
 class EntriesApiTestCase(unittest.TestCase):
@@ -20,7 +20,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'Meeting with investors from China'
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
 
@@ -35,9 +35,9 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'Today am going cycling'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry1), content_type='application/json')
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry1), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
 
@@ -47,7 +47,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'I love cycling'
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry1), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
     def test_add_entry_with_empty_description(self):
@@ -56,7 +56,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': ''
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry1), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
     def test_add_entry_with_missing_fields(self):
@@ -64,7 +64,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'This night'
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry1), content_type='application/json')
+        data = json.dumps(entry1), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
 
@@ -74,7 +74,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'To the Beach'
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
 
@@ -84,7 +84,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'Today'
         }
         response = self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
     
@@ -95,13 +95,13 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'In Munyonyo'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         new_entry = {
             'title': 'Hunting',
             'description': 'In the park'
         }        
         response = self.app.put("/api/v1/entries/1",\
-        data=json.dumps(new_entry), content_type='application/json')
+        data = json.dumps(new_entry), content_type='application/json')
         self.assertEqual(response.status_code, 200) 
 
     def test_edit_entry_that_does_not_exist(self):
@@ -110,13 +110,13 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'In Munyonyo'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         new_entry = {
             'title': 'Hunting',
             'description': 'In the park'
         }        
         response = self.app.put("/api/v1/entries/10",\
-        data=json.dumps(new_entry), content_type='application/json')
+        data = json.dumps(new_entry), content_type='application/json')
         self.assertEqual(response.status_code, 404)       
 
 
@@ -126,7 +126,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'Go to Cineplex'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         response = self.app.get('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
@@ -136,7 +136,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'Go to Cineplex'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')
+        data = json.dumps(entry), content_type='application/json')
         response = self.app.get('/api/v1/entries/10', content_type = 'application/json')
         self.assertEqual(response.status_code, 404)
 
@@ -147,7 +147,7 @@ class EntriesApiTestCase(unittest.TestCase):
             'description': 'At Kyadondo'
         }
         self.app.post("/api/v1/entries",\
-        data=json.dumps(entry), content_type='application/json')      
+        data = json.dumps(entry), content_type='application/json')      
         response = self.app.delete('/api/v1/entries/1', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
                 
