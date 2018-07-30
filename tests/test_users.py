@@ -48,10 +48,10 @@ class UsersApiTestCase(BaseTestCase):
 
     def test_register_user_with_empty_fields(self):
         usr = {
-            "first_name": "",
+            "first_name": "Allan",
             "last_name": "Obore",
             "email": "obore@gmail.com", 
-            "password": "password",
+            "password": "",
         }
         response = self.app.post("/api/v1/auth/signup",\
         data=json.dumps(usr), content_type='application/json')
@@ -70,30 +70,38 @@ class UsersApiTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 400)
 
 
-    # def test_login(self):
-    #     user_logins = {
-    #         "email": "example@gmail.com", 
-    #         "password": "password",
-    #     }
-    #     response = self.app.post("/api/v1/auth/login",\
-    #     data=json.dumps(user_logins), content_type='application/json')
-    #     self.assertEqual(response.status_code, 200)
+    def test_login(self):
+        user_logins = {
+            "email": "example@gmail.com", 
+            "password": "password",
+        }
+        response = self.app.post("/api/v1/auth/login",\
+        data=json.dumps(user_logins), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
-    # def test_login_with_wrong_password(self):
-    #     user_logins = {
-    #         "email": "example@gmail.com", 
-    #         "password": "pword",
-    #     }
-    #     response = self.app.post("/api/v1/auth/login",\
-    #         data=json.dumps(user_logins), content_type='application/json')
-    #     self.assertEqual(response.status_code, 401)
+    def test_login_with_wrong_password(self):
+        user = {
+            "first_name": "Goodluck",
+            "last_name": "Obasanjo",
+            "email": "example@gmail.com", 
+            "password": "password",
+        }
+        response = self.app.post("/api/v1/auth/signup",\
+        data=json.dumps(user), content_type='application/json')
+        user_logins = {
+            "email": "example@gmail.com", 
+            "password": "pword",
+        }
+        response = self.app.post("/api/v1/auth/login",\
+            data=json.dumps(user_logins), content_type='application/json')
+        self.assertEqual(response.status_code, 401)
 
 
 
     def test_get_all_users(self):
         usr1 = {
             "first_name": "Omar",
-            "last_name": "Bashir",
+            "last_name": "Bashir"
             "email": "omar@gmail.com", 
             "password": "password22",
         }
