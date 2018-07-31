@@ -9,6 +9,7 @@ pytest_cache
 # Environments
 my-venv
 env/
+venv/
 
 .vscode
 *.pyc
