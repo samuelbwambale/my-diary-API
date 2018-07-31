@@ -1,13 +1,9 @@
-from werkzeug.security import generate_password_hash
-from api.database import DatabaseConnection
 import psycopg2
-import psycopg2.extras as ex 
+from app.api.database import DatabaseConnection
 
 USERS = []
-connection = DatabaseConnection()
-dict_cur = connection.cursor(cursor_factory=ex.DictCursor)
 
-class User:
+class User(DatabaseConnection):
 
     def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
@@ -18,7 +14,7 @@ class User:
     def add_user(self):
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s)"
         try:
-            connection.cursor.execute(query,(
+            self.cursor.execute(query,(
                 self.first_name, 
                 self.last_name, 
                 self.email, 
@@ -29,18 +25,18 @@ class User:
     def login_user(self, email, password):
         query = "SELECT * FROM users WHERE email = 'email' AND password = 'password'"
         try:
-            dict_cur.execute(query,(email, password))
-            result = dict_cur.fetchall()
+            self.cursor.execute(query,(email, password))
+            result = self.cursor.fetchall()
             return result
         except psycopg2.Error as e:
             print(e.pgerror)
 
-
+    
     def get_all_users(self):
         query = "SELECT * FROM users"
-		try:
-            dict_cur.execute(query)
-			result = dict_cur.fetchall()
-			return result
-		except psycopg2.Error as e:
-			print(e.pgerror)
+        try:
+            self.cursor.execute(query)
+            result = self.cursor.fetchall()
+            return result
+        except psycopg2.Error as e:
+            print(e.pgerror)
