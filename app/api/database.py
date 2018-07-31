@@ -1,9 +1,8 @@
 from werkzeug.security import check_password_hash
 import psycopg2
-import psycopg2.extras as ex
 
 
-class DatabaseConnection(object):
+class DatabaseConnection:
 
     def __init__(self):
         try:
