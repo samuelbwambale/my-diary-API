@@ -12,12 +12,14 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ### Supported endpoints
   
-| EndPoint                                      		| Functionality                                   |
-| --------------------------------------------------------------|------------------------------------------------ |
-| [GET /entries ](#)                            		| Fetch all entries                               |
-| [GET /entries/<entryId>](#)                   		| Fetch single entry			          |
-| [POST /entries](#)                     			| Create an entry	                          |
-| [PUT  /entries/<entryId>](#)                  		| Modify an entry 		                  |
+| EndPoint                                      	| Functionality                                   |
+| ------------------------------------------------------|------------------------------------------------ |
+| GET `/entries`                             		| Fetch all entries                               |
+| GET `/entries/<entryId>`                  		| Fetch single entry			          |
+| POST `/entries`                     			| Create an entry	                          |
+| PUT  `/entries/<entryId>`                  		| Modify an entry 		                  |
+| POST `/auth/signup`                   		| Register a user 		                  |
+| POST `/auth/login`                  			| Login a user	 		                  |
 
 
 ### Prerequisites
@@ -41,7 +43,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ## Setup
 
-* Run `virtualenv -p python3 env-name` on command prompt
+* Run `mkvirtualenv env-name` on command prompt
 * Run `workon env-name` on command prompt
 * Run `git clone` this repository and `cd` into the project root.
 * Run `pip install -r requirements.txt` on command prompt
