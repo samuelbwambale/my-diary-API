@@ -23,14 +23,14 @@ class Entry:
                 self.owner_id))
         except psycopg2.Error as e:
 			print(e.pgerror)
-            
+
 
     def get_all_entries(self):
 		try:
-			connection.cursor = connection.connection.cursor(cursor_factory=ex.DictCursor)
+			cur = connection.cursor(cursor_factory=ex.DictCursor)
 			query = "SELECT * FROM entries "
-            connection.cursor.execute(query)
-			result = connection.cursor.fetchall()
+            cur.execute(query)
+			result = cur.fetchall()
 			if  result != [] :				
 				return result
 			else:
