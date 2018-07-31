@@ -1,7 +1,7 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 import re
-from app.api.models.users import User, USERS, register_user, login_user, get_all_users
+from app.api.models.users import User, USERS, add_user, login_user, get_all_users
 
 class UserListResource(Resource):
     def get(self):
@@ -57,7 +57,7 @@ class UserRegister(Resource):
                         }), 400)
                 user = User(data['first_name'], data['last_name'], data['email'],data['password'] )
                 try:
-                    user.register_user()
+                    user.add_user()
                     return make_response(jsonify({
                         'status': "success",
                         'message': 'User Successfully Created!!',
