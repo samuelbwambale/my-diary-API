@@ -101,7 +101,7 @@ class UsersApiTestCase(BaseTestCase):
     def test_get_all_users(self):
         usr1 = {
             "first_name": "Omar",
-            "last_name": "Bashir"
+            "last_name": "Bashir",
             "email": "omar@gmail.com", 
             "password": "password22",
         }
