@@ -2,12 +2,9 @@ import datatime
 from api.database import DatabaseConnection
 
 ENTRIES = []
+connection = DatabaseConnection()
 
 class Entry:
-    connection = Database()
-    cursor = connection.cursor
-    dict_cursor = connection.dict_cursor
-
 
     def __init__(self, title, description, user_id):
         self.title = title
@@ -17,19 +14,23 @@ class Entry:
 
 
     def add_entry(self):
-        query = "INSERT INTO entries (title, description, create_date, user_id) VALUES (%s, %s, %s)"
-        User.cursor.execute(query,(
-            self.title, 
-            self.description, 
-            self.create_date, 
-            self.user_id))
+        try:
+            query = "INSERT INTO entries (title, description, create_date, owner_id) VALUES (%s, %s, %s,%s)"
+            connection.cursor.execute(query,(
+                self.title, 
+                self.description, 
+                self.create_date, 
+                self.owner_id))
+        except psycopg2.Error as e:
+			print(e.pgerror)
+            
 
     def get_all_entries(self):
 		try:
-			self.cursor=self.connection.cursor(cursor_factory=ex.DictCursor)
+			connection.cursor = connection.connection.cursor(cursor_factory=ex.DictCursor)
 			query = "SELECT * FROM entries "
-            self.cursor.execute(query)
-			result = self.cursor.fetchall()
+            connection.cursor.execute(query)
+			result = connection.cursor.fetchall()
 			if  result != [] :				
 				return result
 			else:
