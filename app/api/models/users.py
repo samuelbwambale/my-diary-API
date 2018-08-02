@@ -44,6 +44,16 @@ class User(DatabaseConnection):
             print(e.pgerror)
 
 
+    def get_a_user(self, email):
+        query = "SELECT * FROM users WHERE email = %s"
+        try:
+            self.cursor.execute(query,[email])
+            result = self.cursor.fetchall()
+            return result
+        except psycopg2.Error as e:
+            print(e.pgerror)
+
+
     def get_user_by_email(self, email):
         query = "SELECT * FROM users WHERE email = %s"
         try:
