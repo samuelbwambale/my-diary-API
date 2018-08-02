@@ -1,7 +1,9 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
+from datetime import timedelta
+from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 import re
-from app.api.models.users import User, USERS, add_user, login_user, get_all_users
+from app.api.models.users import User
 
 class UserListResource(Resource):
     def get(self):
@@ -21,49 +23,46 @@ class UserRegister(Resource):
         parser.add_argument('password', type=str, required=True,
                     help='Password must be a valid string')
         data = parser.parse_args()
-
-        users = User.get_all_users()
-        for user in users:
-            if user['email'] == data['email']:
-                return make_response(
+        if data['first_name'].strip() == "":
+            return make_response(jsonify({
+                'message': 'First name can not be empty.',
+                }), 400)
+        if data['last_name'].strip() == "":
+            return make_response(jsonify({
+                'message': 'Last name can not be empty.',
+                }), 400)
+        if data['email'].strip() == '':
+            return make_response(jsonify(
+                {'message': 'Email can not be empty .',
+                }), 400)
+        if not re.match("[^@]+@[^@]+\.[^@]+", data['email']):
+            return make_response(jsonify({
+                'message': 'Provided email is not a valid email address.',
+                }), 400)
+        if data['password'].strip() == '':
+            return make_response(jsonify(
+                {'message': 'Password can not be empty .',
+                }), 400)
+        if len(data['password']) < 4:
+            return make_response(jsonify(
+                {'message': 'Password must be atleast 4 characters in length.',
+                }), 400)      
+        user = User(data['first_name'], data['last_name'], data['email'],data['password'] )
+        result = user.get_user_by_email(data['email'])  
+        if result !=0:
+            return make_response(
                     jsonify({
                         'status': "Failed",
                         'message': 'This email is already used',
                         }), 400)
-            else:
-                if data['first_name'].strip() == "":
-                    return make_response(jsonify({
-                        'message': 'First name can not be empty.',
-                        }), 400)
-                if data['last_name'].strip() == "":
-                    return make_response(jsonify({
-                        'message': 'Last name can not be empty.',
-                        }), 400)
-                if data['email'].strip() == '':
-                    return make_response(jsonify(
-                        {'message': 'Email can not be empty .',
-                        }), 400)
-                if not re.match("[^@]+@[^@]+\.[^@]+", data['email']):
-                    return make_response(jsonify({
-                        'message': 'Provided email is not a valid email address.',
-                        }), 400)
-                if data['password'].strip() == '':
-                    return make_response(jsonify(
-                        {'message': 'Password can not be empty .',
-                        }), 400)
-                if len(data['password']) < 4:
-                    return make_response(jsonify(
-                        {'message': 'Password must be atleast 4 characters in length.',
-                        }), 400)
-                user = User(data['first_name'], data['last_name'], data['email'],data['password'] )
-                try:
-                    user.add_user()
-                    return make_response(jsonify({
-                        'status': "success",
-                        'message': 'User Successfully Created!!',
-                        }), 201)
-                except Exception as err:
-                    return {'message': '{}'.format(err)}, 500 
+        try:
+            user.add_user()
+            return make_response(jsonify({
+                'status': "success",
+                'message': 'User Successfully Created!!',
+                }), 201)
+        except Exception as err:
+            return {'message': '{}'.format(err)}, 500 
 
 
 class UserLogin(Resource):
@@ -75,23 +74,26 @@ class UserLogin(Resource):
                     help='Password must be a valid string')
         data = parser.parse_args()
 
-        users = User.get_all_users()
-        for user in users:
-            if user['email'] == data['email']:
-                if user['password'] == data['password']:
-                    return make_response(jsonify({
-                    'status': "success",
-                    'message': 'Logged in',
-                    }), 200)
-                return make_response(jsonify({
-                    'status': "failed",
-                    'message': 'The password entered is incorrect.'
-                    }), 401)
+        usr = User(None, None,data['email'],data['password'] )
+        check = usr.login_user(data['email'], data['password'])
+        if check[0]:
+            expires = timedelta(minutes=60)
+            #user_email = data['email']
+            user_id = dict(check[0])
+            import pdb; pdb.set_trace()
+            token = create_access_token(identity=user_id, expires_delta=expires)
+            
+            return make_response(jsonify({
+                'status': "success",
+                'message': "Logged in",
+                'Token'  : token
+                }), 200)
+        else:
             return make_response(jsonify({
                 'status': "failed",
-                'message': 'The email entered is invalid or not registered.',
-                }), 400)
-        
+                'message': "Invalid username or password."
+                }), 401)
+
 
 class UserLogout(Resource):
     def post(self):
