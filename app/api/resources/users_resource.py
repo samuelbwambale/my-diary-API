@@ -5,25 +5,6 @@ from flask_jwt_extended import create_access_token
 import re
 from app.api.models.users import User
 
-class UserListResource(Resource):
-    def get(self):
-        usr = User(None, None, None, None )
-        users = usr.get_all_users()
-        if not users:
-            return make_response(jsonify({
-                'message': 'No users subscribed as yet',
-                }), 200)
-        else:
-            user_lst = []
-            for u in users:
-                user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
-                user_lst.append(user)
-            return make_response(jsonify({
-                'status': 'success',
-                'entry': user_lst
-                }), 200)
-
-
 class UserRegister(Resource):
     def post(self):
         parser = reqparse.RequestParser()
@@ -114,3 +95,21 @@ class UserLogout(Resource):
             'status': "success",
             'message':'Logged out successfully'}), 200)
         
+
+class UserListResource(Resource):
+    def get(self):
+        usr = User(None, None, None, None )
+        users = usr.get_all_users()
+        if not users:
+            return make_response(jsonify({
+                'message': 'No users subscribed as yet',
+                }), 200)
+        else:
+            user_lst = []
+            for u in users:
+                user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
+                user_lst.append(user)
+            return make_response(jsonify({
+                'status': 'success',
+                'entry': user_lst
+                }), 200)
