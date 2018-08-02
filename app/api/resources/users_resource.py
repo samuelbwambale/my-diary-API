@@ -1,14 +1,27 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 from datetime import timedelta
-from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
+from flask_jwt_extended import create_access_token
 import re
 from app.api.models.users import User
 
 class UserListResource(Resource):
     def get(self):
-        users = User.get_all_users()
-        return make_response(jsonify({'users': users}), 200)
+        usr = User(None, None, None, None )
+        users = usr.get_all_users()
+        if not users:
+            return make_response(jsonify({
+                'message': 'No users subscribed as yet',
+                }), 200)
+        else:
+            user_lst = []
+            for u in users:
+                user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
+                user_lst.append(user)
+            return make_response(jsonify({
+                'status': 'success',
+                'entry': user_lst
+                }), 200)
 
 
 class UserRegister(Resource):
@@ -75,12 +88,12 @@ class UserLogin(Resource):
         data = parser.parse_args()
 
         usr = User(None, None,data['email'],data['password'] )
-        check = usr.login_user(data['email'], data['password'])
-        if check[0]:
+        row = usr.login_user(data['email'], data['password'])
+        if row[0]:
             expires = timedelta(minutes=60)
             #user_email = data['email']
-            user_id = dict(check[0])
-            import pdb; pdb.set_trace()
+            user_id = row[0]
+            #import pdb; pdb.set_trace()
             token = create_access_token(identity=user_id, expires_delta=expires)
             
             return make_response(jsonify({
