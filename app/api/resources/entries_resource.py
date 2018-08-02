@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
-from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.api.models.entries import Entry
 from app.api.resources.users_resource import UserLogin
 
@@ -16,7 +16,7 @@ class EntryResource(Resource):
         ent = Entry(None, None, None)
         owner_id = get_jwt_identity()
         result = ent.get_single_entry_for_user(entry_id, owner_id)
-        if not result[0]:
+        if not result:
             return make_response(jsonify({
                 'status': 'failed',
                 'message': 'Entry with this ID not found.',
@@ -30,16 +30,19 @@ class EntryResource(Resource):
 
     @jwt_required
     def put(self, entry_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('description', type=str, required=True,
+                    help='Description must be a valid string')
         data = parser.parse_args()
         ent = Entry(None, None, None)
-        result = ent.check_entry_with_id_exists(entry_id)        
-        if result == 0:
+        owner_id = get_jwt_identity()
+        result = ent.get_single_entry_for_user(entry_id, owner_id)
+        if not result:
             return make_response(jsonify({
             'status': 'failed',
             'message': 'Entry with this ID not found.',
             }), 404)
         else:
-            owner_id = get_jwt_identity()
             ent.update_an_entry(entry_id, data['description'], owner_id)
             return make_response(jsonify({
                 'status': 'success',
@@ -49,14 +52,14 @@ class EntryResource(Resource):
     @jwt_required      
     def delete(self, entry_id):
         ent = Entry(None, None, None)
-        result = ent.check_entry_with_id_exists(entry_id)
-        if result == 0:
+        owner_id = get_jwt_identity()
+        result = ent.get_single_entry_for_user(entry_id, owner_id)
+        if not result:
             return make_response(jsonify({
             'status': 'failed',
             'message': 'Entry with this ID not found.',
             }), 404)
-        else:
-            owner_id = get_jwt_identity()
+        else:            
             ent.delete_an_entry(entry_id, owner_id)
             return make_response(jsonify({
             'status': 'success',
@@ -70,17 +73,17 @@ class EntryListResource(Resource):
         owner_id = get_jwt_identity()
         ent = Entry(None, None, None)
         result = ent.get_all_entries(owner_id)
-        if not result[0]:
+        if not result:
             return make_response(jsonify({
                 'message': 'No entries. Please add entry.'
                 }), 200)
         else:
             entries = []
-            for row in result
+            for row in result:
                 entry= {"entry_id":row[0], "owner_id":row[1], "title":row[2], "description":row[3]}
                 entries.append(entry)
             return make_response(jsonify({
-                'status': 'success'
+                'status': 'success',
                 'Entry': entries
                 }), 200) 
 
@@ -120,11 +123,10 @@ class EntryListResource(Resource):
             try:
                 
                 owner_id = get_jwt_identity()
-
                 entry = Entry(data['title'], data['description'], owner_id)
-                ent.add_an_entry()
+                entry.add_an_entry()
                 return make_response(jsonify({
-                    'status': "success",
+                    'status': 'success',
                     'message': 'Entry successfully created!',
                 }), 201)
             except Exception as err:
