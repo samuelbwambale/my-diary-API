@@ -10,13 +10,13 @@ from app.api.database import DatabaseConnection
 class BaseTestCase(unittest.TestCase):
 
     def setUp(self):
-
+        DatabaseConnection.__init__(self)
+        
         self.app = app.test_client()
         with app.test_request_context():
             database_connection = DatabaseConnection()
             database_connection.create_table_users()
             database_connection.create_table_entries()
-            database_connection.cursor.execute("INSERT INTO users (first_name, last_name, email, password) VALUES ('John', 'Doe', 'joe@gmail.com', 'passwd');")
 
             self.token = create_access_token(identity=1)
             self.header = {"Authorization" : "Bearer {}". format(self.token)}  
