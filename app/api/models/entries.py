@@ -19,7 +19,7 @@ class Entry(DatabaseConnection):
                 self.title,
                 self.description,
                 self.owner_id,
-                now.strftime("%Y-%m-%d")
+                now.strftime("%Y-%m-%d %H:%M")
                 ))
         except psycopg2.Error as e:
             print(e.pgerror)
@@ -50,13 +50,13 @@ class Entry(DatabaseConnection):
         except psycopg.Error as er:
             print(er.pgerror)
 
-    def get_single_entry_for_user(self, entry_id, owner_id)
-        query = "SELECT * FROM entries WHERE entry_id AND owner_id = %s"
+    def get_single_entry_for_user(self, entry_id, owner_id):
+        query = "SELECT * FROM entries WHERE entry_id =%s AND owner_id = %s"
         try:
             self.cursor.execute(query, (entry_id, owner_id))
-            result = self.cursor.fetchall()
+            result = self.cursor.fetchone()
             return result
-        except psycopg.Error as er:
+        except psycopg2.Error as er:
             print(er.pgerror)
 
 
