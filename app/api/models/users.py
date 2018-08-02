@@ -10,7 +10,7 @@ class User(DatabaseConnection):
         self.last_name = last_name
         self.email = email
         self.password = password
-            
+
 
     def add_user(self):
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
@@ -28,7 +28,7 @@ class User(DatabaseConnection):
         query = "SELECT * FROM users WHERE email = %s AND password = %s"
         try:
             self.cursor.execute(query,(email, password))
-            result = self.cursor.fetchall()
+            result = self.cursor.fetchone()
             return result
         except psycopg2.Error as e:
             print(e.pgerror)
