@@ -70,11 +70,9 @@ class UserLogin(Resource):
 
         usr = User(None, None,data['email'],data['password'] )
         row = usr.login_user(data['email'], data['password'])
-        if row[0]:
+        if row:
             expires = timedelta(minutes=60)
-            #user_email = data['email']
             user_id = row[0]
-            #import pdb; pdb.set_trace()
             token = create_access_token(identity=user_id, expires_delta=expires)
             
             return make_response(jsonify({
