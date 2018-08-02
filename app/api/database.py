@@ -7,7 +7,6 @@ class DatabaseConnection:
             self.connection = psycopg2.connect("dbname='mydiarydb' user='root' password='root' host='localhost'")
             self.connection.autocommit = True
             self.cursor = self.connection.cursor()
-            print("Connection successful")
         except psycopg2.Error as e:
             print(e.pgerror)
 
