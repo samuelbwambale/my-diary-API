@@ -50,6 +50,7 @@ class Entry(DatabaseConnection):
         except psycopg.Error as er:
             print(er.pgerror)
 
+
     def get_single_entry_for_user(self, entry_id, owner_id):
         query = "SELECT * FROM entries WHERE entry_id =%s AND owner_id = %s"
         try:
