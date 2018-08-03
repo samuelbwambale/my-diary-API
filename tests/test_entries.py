@@ -24,6 +24,11 @@ class EntriesApiTestCase(BaseTestCase):
         data = json.dumps(entry), headers = self.header, content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
+    def test_add_an_entry_without_token(self):
+        response = self.app.post("/api/v1/entries",
+        data = json.dumps(entry), content_type='application/json')
+        self.assertEqual(response.status_code, 500)
+
 
     def test_add_entry_with_missing_fields(self):
         entry1 = {
@@ -68,3 +73,5 @@ class EntriesApiTestCase(BaseTestCase):
         data = json.dumps(entry), content_type='application/json')
         response = self.app.get('/api/v1/entries/10', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 404)
+
+    
