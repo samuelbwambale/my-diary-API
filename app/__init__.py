@@ -4,8 +4,8 @@ from config import config
 from app.api.database import DatabaseConnection
 
 db = DatabaseConnection()
-db.create_table_entries()
 db.create_table_users()
+db.create_table_entries()
 app = Flask(__name__)
 
 app.config.from_object(config['development'])
