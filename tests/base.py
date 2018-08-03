@@ -11,9 +11,11 @@ class BaseTestCase(unittest.TestCase):
     
     def setUp(self):         
         DatabaseConnection.__init__(self)       
-        self.app = app.app_context()
-        with app.test_request_context():
+        self.app = app.test_client()
+        with app.app_context():
             database_connection = DatabaseConnection()
+            print("Hello")
+            print(database_connection.cursor)
             database_connection.drop_table_users()
             database_connection.drop_table_entries()            
             database_connection.create_table_users()
@@ -23,7 +25,7 @@ class BaseTestCase(unittest.TestCase):
 
 
     def tearDown(self):
-        with app.test_request_context():
+        with app.app_context():
             database_connection = DatabaseConnection()
             database_connection.drop_table_users()
             database_connection.drop_table_entries()
