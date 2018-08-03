@@ -26,6 +26,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
   1.	HTML/CSS
   2.	Javascript/ES6
   3.	Python/Flask
+  4. 	Postgres DB
 
 ## Technologies
 
@@ -33,16 +34,13 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 * Flask Restful
 
 
-## Requirements
+## Setup
 
 * Install [Python](https://www.python.org/downloads/)
 * Run `pip install virtualenv` on command prompt
 * Run `pip install virtualenvwrapper` on command prompt
 * Run `export WORKON_HOME=~/Envs` on command prompt
 * Run `source /usr/local/bin/virtualenvwrapper.sh` on command prompt
-
-## Setup
-
 * Run `mkvirtualenv env-name` on command prompt
 * Run `workon env-name` on command prompt
 * Run `git clone` this repository and `cd` into the project root.
