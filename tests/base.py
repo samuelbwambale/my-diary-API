@@ -11,7 +11,7 @@ class BaseTestCase(unittest.TestCase):
     
     def setUp(self):         
         DatabaseConnection.__init__(self)       
-        self.app = app.test_client()
+        self.app = app.app_context()
         with app.test_request_context():
             database_connection = DatabaseConnection()
             database_connection.drop_table_users()
