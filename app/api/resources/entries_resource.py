@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from app.api.models.entries import Entry
 from app.api.resources.users_resource import UserLogin
 
@@ -15,6 +15,10 @@ class EntryResource(Resource):
     def get(self, entry_id):
         ent = Entry(None, None, None)
         owner_id = get_jwt_identity()
+        if not owner_id:
+            return make_response(jsonify({
+                    'message': 'Token is missing.',
+                    }), 403)
         result = ent.get_single_entry_for_user(entry_id, owner_id)
         if not result:
             return make_response(jsonify({
