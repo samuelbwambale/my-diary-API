@@ -1,14 +1,11 @@
 import psycopg2
 
 class DatabaseConnection:
-
     def __init__(self):
-        try:
-            self.connection = psycopg2.connect("dbname='mydiarydb' user='root' password='root' host='localhost'")
-            self.connection.autocommit = True
-            self.cursor = self.connection.cursor()
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        self.connection = psycopg2.connect("dbname='mydiarydb' user='root' password='root' host='localhost'")
+        self.connection.autocommit = True
+        self.cursor = self.connection.cursor()
+        
 
 
     def create_table_users(self):
