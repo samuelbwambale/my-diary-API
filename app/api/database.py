@@ -27,3 +27,22 @@ class DatabaseConnection:
             print("Entries table created")
         except psycopg2.Error as e:
             print(e.pgerror)
+
+
+    def drop_table_users(self):
+        try:
+            query = "DROP TABLE IF EXISTS users CASCADE"
+            self.cursor.execute(query)
+        except psycopg2.Error as e:
+            print(e.pgerror)
+
+    def drop_table_entries(self):
+        try:
+            query = "DROP TABLE IF EXISTS entries CASCADE"
+            self.cursor.execute(query)
+        except psycopg2.Error as e:
+            print(e.pgerror)
+
+    def stop_connection(self):
+        self.cursor.close()
+        self.connection.close()
