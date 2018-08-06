@@ -47,7 +47,7 @@ class Entry(DatabaseConnection):
             self.cursor.execute(query, (owner_id,))
             result = self.cursor.fetchall()
             return result
-        except psycopg.Error as er:
+        except psycopg2.Error as er:
             print(er.pgerror)
 
 
