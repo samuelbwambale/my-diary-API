@@ -1,9 +1,11 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
+import datetime
 from app.api.models.entries import Entry
 from app.api.resources.users_resource import UserLogin
 
+now = datetime.datetime.now()
 parser = reqparse.RequestParser()
 parser.add_argument('title', type=str, required=True,
                     help='Title must be a valid string')
@@ -26,7 +28,7 @@ class EntryResource(Resource):
                 'message': 'Entry with this ID not found.',
                 }), 404)
         else:
-            entry= {"entry_id":result[0], "owner_id":result[1], "title":result[2], "description":result[3]}
+            entry= {"entry_id":result[0], "owner_id":result[1], "title":result[2], "description":result[3], "create_date":result[4]}
             return make_response(jsonify({
                 'status': 'success',
                 'entry': entry
@@ -46,12 +48,25 @@ class EntryResource(Resource):
             'status': 'failed',
             'message': 'Entry with this ID not found.',
             }), 404)
-        else:
+        if result[4].strftime("%Y-%m-%d") == now.strftime("%Y-%m-%d"):
+            if data["description"].strip() == "":
+                return make_response(jsonify({
+                    'status': 'failed',
+                    'message': 'The new description can not be empty.'}), 400)
+
+            if len(data["description"].strip()) < 6:
+                return make_response(jsonify({
+                    'status': 'failed',
+                    'message': 'Description should be at least 6 characters long.'}), 400)
             ent.update_an_entry(entry_id, data['description'], owner_id)
             return make_response(jsonify({
                 'status': 'success',
                 'message': 'Entry edited successfully.',
-                }), 200)      
+                }), 200)
+        return make_response(jsonify({
+            'status': 'failed',
+            'message': 'You can only edit and entry on the day it was created!',
+            }), 401)    
 
     @jwt_required      
     def delete(self, entry_id):
@@ -84,7 +99,7 @@ class EntryListResource(Resource):
         else:
             entries = []
             for row in result:
-                entry= {"entry_id":row[0], "owner_id":row[1], "title":row[2], "description":row[3]}
+                entry= {"entry_id":row[0], "owner_id":row[1], "title":row[2], "description":row[3], "create_date":row[4]}
                 entries.append(entry)
             return make_response(jsonify({
                 'status': 'success',
