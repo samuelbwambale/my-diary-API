@@ -2,7 +2,7 @@ import psycopg2
 
 class DatabaseConnection:
     def __init__(self):
-        self.connection = psycopg2.connect("dbname='mydiarydb' user='root' password='root' host='localhost'")
+        self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
         self.connection.autocommit = True
         self.cursor = self.connection.cursor()
         
