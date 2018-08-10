@@ -9,7 +9,8 @@ from app.api.database import DatabaseConnection
 
 class BaseTestCase(unittest.TestCase):
     
-    def setUp(self):         
+    def setUp(self):   
+        """ Set up the test environment """      
         DatabaseConnection.__init__(self)       
         self.app = app.test_client()
         with app.test_request_context():
@@ -22,7 +23,9 @@ class BaseTestCase(unittest.TestCase):
             self.header = {"Authorization" : "Bearer {}". format(self.token)}  
 
 
+
     def tearDown(self):
+        """ Tear down the test environment after the test """
         with app.test_request_context():
             database_connection = DatabaseConnection()
             database_connection.drop_table_users()
