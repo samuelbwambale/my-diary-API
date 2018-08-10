@@ -4,8 +4,7 @@ class DatabaseConnection:
     def __init__(self):
         self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
         self.connection.autocommit = True
-        self.cursor = self.connection.cursor()
-        
+        self.cursor = self.connection.cursor()        
 
 
     def create_table_users(self):
@@ -27,18 +26,14 @@ class DatabaseConnection:
 
 
     def drop_table_users(self):
-        try:
-            query = "DROP TABLE IF EXISTS users CASCADE"
-            self.cursor.execute(query)
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        query = "DROP TABLE IF EXISTS users CASCADE"
+        self.cursor.execute(query)
+
 
     def drop_table_entries(self):
-        try:
-            query = "DROP TABLE IF EXISTS entries CASCADE"
-            self.cursor.execute(query)
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        query = "DROP TABLE IF EXISTS entries CASCADE"
+        self.cursor.execute(query)
+        
 
     def stop_connection(self):
         self.cursor.close()
