@@ -3,6 +3,7 @@ from app.api.database import DatabaseConnection
 
 
 class User(DatabaseConnection):
+    """ User class """
 
     def __init__(self, first_name, last_name, email, password):
         DatabaseConnection.__init__(self)
@@ -13,6 +14,7 @@ class User(DatabaseConnection):
 
 
     def add_user(self):
+        """ Add a new user to the users table """
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
         try:
             self.cursor.execute(query,(
@@ -25,6 +27,7 @@ class User(DatabaseConnection):
 
     
     def login_user(self, email, password):
+        """ Get a user with this username and password """
         query = "SELECT * FROM users WHERE email = %s AND password = %s"
         self.cursor.execute(query,(email, password))
         result = self.cursor.fetchone()
@@ -32,6 +35,7 @@ class User(DatabaseConnection):
 
 
     def get_all_users(self):
+        """ Fetch all existing users """
         query = "SELECT * FROM users"
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -39,6 +43,7 @@ class User(DatabaseConnection):
 
 
     def get_user_by_email(self, email):
+        """ Get a user by email """
         query = "SELECT * FROM users WHERE email = %s"
         self.cursor.execute(query,[email])
         result = self.cursor.rowcount

@@ -7,6 +7,7 @@ from app.api.models.users import User
 
 class UserRegister(Resource):
     def post(self):
+        """ Method to signup a user """
         parser = reqparse.RequestParser()
         parser.add_argument('first_name', type=str, required=True,
                     help='First name must be a valid string')
@@ -61,6 +62,7 @@ class UserRegister(Resource):
 
 class UserLogin(Resource):
     def post(self):
+        """ Method to login a user and obtain a token """
         parser = reqparse.RequestParser()
         parser.add_argument('email', type=str, required=True,
                     help='Email must be a valid email')
@@ -89,6 +91,7 @@ class UserLogin(Resource):
 
 class UserLogout(Resource):
     def post(self):
+        """ Method to logout a user """
         return make_response(jsonify({
             'status': "success",
             'message':'Logged out successfully'}), 200)
@@ -96,6 +99,7 @@ class UserLogout(Resource):
 
 class UserListResource(Resource):
     def get(self):
+        """ Method to retrieve all exisiting users """
         usr = User(None, None, None, None )
         users = usr.get_all_users()
         if not users:

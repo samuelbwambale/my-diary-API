@@ -15,6 +15,7 @@ parser.add_argument('description', type=str, required=True,
 class EntryResource(Resource):
     @jwt_required
     def get(self, entry_id):
+        """ Method to retrieve a single entry of a user """
         ent = Entry(None, None, None)
         owner_id = get_jwt_identity()
         if not owner_id:
@@ -36,6 +37,7 @@ class EntryResource(Resource):
 
     @jwt_required
     def put(self, entry_id):
+        """ Method to update an entry """
         parser = reqparse.RequestParser()
         parser.add_argument('description', type=str, required=True,
                     help='Description must be a valid string')
@@ -70,6 +72,7 @@ class EntryResource(Resource):
 
     @jwt_required      
     def delete(self, entry_id):
+        """ Method to delete an entry """
         ent = Entry(None, None, None)
         owner_id = get_jwt_identity()
         result = ent.get_single_entry_for_user(entry_id, owner_id)
@@ -89,6 +92,7 @@ class EntryResource(Resource):
 class EntryListResource(Resource):
     @jwt_required
     def get(self):
+        """ Method to retrieve all entries of a particular user """
         owner_id = get_jwt_identity()
         ent = Entry(None, None, None)
         result = ent.get_all_entries(owner_id)
@@ -109,6 +113,7 @@ class EntryListResource(Resource):
 
     @jwt_required
     def post(self):
+        """ Method to add an entry """
         data = parser.parse_args()
         title = data['title']
         description = data['description']
