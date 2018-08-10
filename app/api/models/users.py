@@ -26,29 +26,20 @@ class User(DatabaseConnection):
     
     def login_user(self, email, password):
         query = "SELECT * FROM users WHERE email = %s AND password = %s"
-        try:
-            self.cursor.execute(query,(email, password))
-            result = self.cursor.fetchone()
-            return result
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        self.cursor.execute(query,(email, password))
+        result = self.cursor.fetchone()
+        return result
 
 
     def get_all_users(self):
         query = "SELECT * FROM users"
-        try:
-            self.cursor.execute(query)
-            result = self.cursor.fetchall()
-            return result
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        return result
 
 
     def get_user_by_email(self, email):
         query = "SELECT * FROM users WHERE email = %s"
-        try:
-            self.cursor.execute(query,[email])
-            result = self.cursor.rowcount
-            return result
-        except psycopg2.Error as e:
-            print(e.pgerror)
+        self.cursor.execute(query,[email])
+        result = self.cursor.rowcount
+        return result
