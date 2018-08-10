@@ -4,10 +4,12 @@ __pycache__
 # Unit test / coverage reports
 .coverage
 .pytest_cache/
+pytest_cache
 
 # Environments
 my-venv
 env/
+venv/
 
 .vscode
 *.pyc

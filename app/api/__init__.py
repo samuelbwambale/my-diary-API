@@ -5,10 +5,16 @@ apiv1 = Blueprint('api',__name__)
 api = Api(apiv1)
 
 
-from .entries_resource import EntryListResource
-from .entries_resource import EntryResource
-#GET all entries or POST an entry
+from .resources.entries_resource import EntryListResource
+from .resources.entries_resource import EntryResource
 api.add_resource(EntryListResource,'/entries')
-#GET or PUT or DELETE an entry
 api.add_resource(EntryResource,'/entries/<int:entry_id>')
 
+from .resources.users_resource import UserListResource
+from .resources.users_resource import UserRegister
+from .resources.users_resource import UserLogin
+from .resources.users_resource import UserLogout
+api.add_resource(UserListResource,'/users')
+api.add_resource(UserRegister,'/auth/signup')
+api.add_resource(UserLogin,'/auth/login')
+api.add_resource(UserLogout,'/auth/logout')

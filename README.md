@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/samuelbwambale/my_diary.svg?branch=CHALLANGE-TWO)](https://travis-ci.com/samuelbwambale/my_diary)[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLANGE-TWO)](https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLANGE-TWO)[![Maintainability](https://api.codeclimate.com/v1/badges/664c55f5d7a35cfc08e4/maintainability)](https://codeclimate.com/github/samuelbwambale/my_diary/maintainability)
+[![Build Status](https://travis-ci.org/samuelbwambale/my_diary.svg?branch=CHALLENGE-THREE)](https://travis-ci.org/samuelbwambale/my_diary)[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLENGE-THREE)](https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLENGE-THREE)[![Maintainability](https://api.codeclimate.com/v1/badges/664c55f5d7a35cfc08e4/maintainability)](https://codeclimate.com/github/samuelbwambale/my_diary/maintainability)
 
 # My Diary
 
@@ -12,12 +12,14 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ### Supported endpoints
   
-| EndPoint                                      		| Functionality                                   |
-| --------------------------------------------------------------|------------------------------------------------ |
-| [GET /entries ](#)                            		| Fetch all entries                               |
-| [GET /entries/<entryId>](#)                   		| Fetch single entry			          |
-| [POST /entries](#)                     			| Create an entry	                          |
-| [PUT  /entries/<entryId>](#)                  		| Modify an entry 		                  |
+| EndPoint                                      	| Functionality                                   |
+| ------------------------------------------------------|------------------------------------------------ |
+| GET `/entries`                             		| Fetch all entries                               |
+| GET `/entries/<entryId>`                  		| Fetch single entry			          |
+| POST `/entries`                     			| Create an entry	                          |
+| PUT  `/entries/<entryId>`                  		| Modify an entry 		                  |
+| POST `/auth/signup`                   		| Register a user 		                  |
+| POST `/auth/login`                  			| Login a user	 		                  |
 
 
 ### Prerequisites
@@ -41,7 +43,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ## Setup
 
-* Run `virtualenv -p python3 env-name` on command prompt
+* Run `mkvirtualenv env-name` on command prompt
 * Run `workon env-name` on command prompt
 * Run `git clone` this repository and `cd` into the project root.
 * Run `pip install -r requirements.txt` on command prompt
