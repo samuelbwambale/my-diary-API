@@ -78,10 +78,10 @@ class EntriesApiTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 400)
 
     
-    def test_add_entry_with_description_less_than_6_characters(self):
+    def test_add_entry_with_description_less_than_4_characters(self):
         entry = {
             'title': ' Going to church',
-            'description': 'Today'
+            'description': 'Now'
         }
         response = self.app.post("/api/v1/entries",
         data = json.dumps(entry), headers = self.header, content_type='application/json')
