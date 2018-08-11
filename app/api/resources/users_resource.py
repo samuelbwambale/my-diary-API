@@ -18,36 +18,27 @@ class UserRegister(Resource):
         parser.add_argument('password', type=str, required=True,
                     help='Password must be a valid string')
         data = parser.parse_args()
-        if data['first_name'].strip() == "":
+        if (data['first_name'].strip() == "") or (data['last_name'].strip() == "") or (data['email'].strip() == '') or (data['password'].strip() == ''):
             return make_response(jsonify({
-                'message': 'First name can not be empty.',
-                }), 400)
-        if data['last_name'].strip() == "":
-            return make_response(jsonify({
-                'message': 'Last name can not be empty.',
-                }), 400)
-        if data['email'].strip() == '':
-            return make_response(jsonify(
-                {'message': 'Email can not be empty .',
+                'status': 'failed',
+                'message': 'The fistname or lastname or email or password can not be empty.'
                 }), 400)
         if not re.match("[^@]+@[^@]+\.[^@]+", data['email']):
             return make_response(jsonify({
-                'message': 'Provided email is not a valid email address.',
-                }), 400)
-        if data['password'].strip() == '':
-            return make_response(jsonify(
-                {'message': 'Password can not be empty .',
+                'status': 'failed',
+                'message': 'Provided email is not a valid email address.'
                 }), 400)
         if len(data['password']) < 4:
-            return make_response(jsonify(
-                {'message': 'Password must be atleast 4 characters in length.',
+            return make_response(jsonify({
+                'status': 'failed',
+                'message': 'Password must be atleast 4 characters in length.'
                 }), 400)      
         user = User(data['first_name'], data['last_name'], data['email'],data['password'] )
         result = user.get_user_by_email(data['email'])  
         if result !=0:
             return make_response(
                     jsonify({
-                        'status': "Failed",
+                        'status': "failed",
                         'message': 'This email is already used',
                         }), 400)
         try:

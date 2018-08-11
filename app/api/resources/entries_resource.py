@@ -107,7 +107,7 @@ class EntryListResource(Resource):
                 entries.append(entry)
             return make_response(jsonify({
                 'status': 'success',
-                'Entry': entries
+                'Entries': entries
                 }), 200) 
 
 
@@ -117,25 +117,14 @@ class EntryListResource(Resource):
         data = parser.parse_args()
         title = data['title']
         description = data['description']
-        if title.strip() == "":
+        if (title.strip() == "") or (description.strip() == ""):
             return make_response(jsonify({
                 'status': 'failed',
-                'message': 'Title can not be empty.'}), 400)
-
-        if len(title.strip()) < 4:
+                'message': 'The title or description can not be empty.'}), 400)
+        if (len(title.strip()) < 4) or (len(description.strip()) < 4):
             return make_response(jsonify({
                 'status': 'failed',
-                'message': 'Title should be at least 4 characters long.'}), 400)
-            
-        if description.strip() == "":
-            return make_response(jsonify({
-                'status': 'failed',
-                'message': 'Description can not be empty.'}), 400)
-
-        if len(description.strip()) < 6:
-            return make_response(jsonify({
-                'status': 'failed',
-                'message': 'Sescription should be at least 6 characters long.'}), 400)
+                'message': 'The title and description should be at least 4 characters long.'}), 400)
         ent = Entry(data['title'], data['description'], None)
         check_ent = ent.check_entry_with_title_exists(data['title'])
         if check_ent != 0:
@@ -144,8 +133,7 @@ class EntryListResource(Resource):
                 'message': 'Entry with same title already exists!',
                 }), 400)
         else:
-            try:
-                
+            try:                
                 owner_id = get_jwt_identity()
                 entry = Entry(data['title'], data['description'], owner_id)
                 entry.add_an_entry()
