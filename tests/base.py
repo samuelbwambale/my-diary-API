@@ -7,14 +7,13 @@ from app import app
 from app.api.models.users import User
 from app.api.database import DatabaseConnection
 
-app.config['TESTING'] = True 
 
 class BaseTestCase(unittest.TestCase):
     
     def setUp(self):   
         """ Set up the test environment """
         DatabaseConnection.__init__(self)
-                      
+        app.config['TESTING'] = True               
         self.app = app.test_client()
         with app.test_request_context():
             database_connection = DatabaseConnection()

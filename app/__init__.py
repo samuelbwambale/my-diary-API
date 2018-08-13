@@ -11,7 +11,6 @@ db.create_table_users()
 db.create_table_entries()
 """ Create the tables for users and entries """
 
-app.config.from_object(config['development'])
 jwt = JWTManager(app)
 app.config['SECRET_KEY'] = 'alibaba'
 
