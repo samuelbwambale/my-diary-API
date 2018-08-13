@@ -12,8 +12,8 @@ class BaseTestCase(unittest.TestCase):
     
     def setUp(self):   
         """ Set up the test environment """
-        DatabaseConnection.__init__(self)
-        app.config['TESTING'] = True               
+        app.config['TESTING'] = True   
+        DatabaseConnection.__init__(self)            
         self.app = app.test_client()
         with app.test_request_context():
             database_connection = DatabaseConnection()
