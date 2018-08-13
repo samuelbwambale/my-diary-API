@@ -1,10 +1,17 @@
 import psycopg2
+from app import app
+from config import config
+
+
 
 class DatabaseConnection:
     def __init__(self):
-        self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
+        if app.config['TESTING']:
+            self.connection = psycopg2.connect("dbname='testdb' user='postgres' password='postgres' host='localhost'")
+        else:
+            self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
         self.connection.autocommit = True
-        self.cursor = self.connection.cursor()        
+        self.cursor = self.connection.cursor()
 
 
     def create_table_users(self):
@@ -38,3 +45,10 @@ class DatabaseConnection:
     def stop_connection(self):
         self.cursor.close()
         self.connection.close()
+
+
+if __name__ == "__main__":
+    conn = DatabaseConnection()
+    conn.create_table_users()
+    conn.create_table_entries()
+    conn.stop_connection()

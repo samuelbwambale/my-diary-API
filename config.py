@@ -1,8 +1,14 @@
 
-class Config:
-    DEBUG=True
+class Development:
+    DEBUG = True
+    TESTING = False
+
+class Testing:
+    DEBUG = True
+    TESTING = True
 
 
 config  = {
-    'development': Config
+    'development': Development,
+    'testing': Testing
 }
