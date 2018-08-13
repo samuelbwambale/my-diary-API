@@ -47,8 +47,8 @@ class DatabaseConnection:
         self.connection.close()
 
 
-if __name__ == "__main__":
-    conn = DatabaseConnection()
-    conn.create_table_users()
-    conn.create_table_entries()
-    conn.stop_connection()
+# if __name__ == "__main__":
+#     conn = DatabaseConnection()
+#     conn.create_table_users()
+#     conn.create_table_entries()
+#     conn.stop_connection()
