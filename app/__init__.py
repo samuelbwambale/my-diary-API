@@ -4,9 +4,12 @@ from config import config
 from app.api.database import DatabaseConnection
 
 db = DatabaseConnection()
-db.create_table_entries()
 db.create_table_users()
+db.create_table_entries()
+""" Create the tables for users and entries """
+
 app = Flask(__name__)
+""" Initialize the flask application """
 
 app.config.from_object(config['development'])
 jwt = JWTManager(app)

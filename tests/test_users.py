@@ -1,6 +1,8 @@
 import unittest
 import json
 from tests.base import BaseTestCase
+from app.api.models.users import User
+
 
 user = {
             "first_name": "Isaac",
@@ -100,4 +102,24 @@ class UsersApiTestCase(BaseTestCase):
         response = self.app.post("/api/v1/auth/login",
         data=json.dumps(logins), content_type='application/json')
         self.assertEqual(response.status_code, 401)
+
+
+    def test_get_all_users(self):
+        response = self.app.get('/api/v1/users', content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
     
+    def test_get_user_by_email(self):
+        user = {
+            "first_name": "Isaac",
+            "last_name": "Newton",
+            "email": "newsboy@gmail.com", 
+            "password": "password",
+        }
+        self.app.post("/api/v1/auth/signup",
+        data=json.dumps(user), content_type='application/json')
+        user = User(None,None,None,None)
+        Found = False
+        usr = user.get_user_by_email("newsboy@gmail.com")
+        if usr:
+            Found = True       
+        self.assertEqual(Found, True)

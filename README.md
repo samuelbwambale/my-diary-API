@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/samuelbwambale/my_diary.svg?branch=CHALLENGE-THREE)](https://travis-ci.org/samuelbwambale/my_diary)[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLENGE-THREE)](https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLENGE-THREE)[![Maintainability](https://api.codeclimate.com/v1/badges/664c55f5d7a35cfc08e4/maintainability)](https://codeclimate.com/github/samuelbwambale/my_diary/maintainability)
+[![Build Status](https://travis-ci.org/samuelbwambale/my_diary.svg?branch=CHALLENGE-THREE-v2)](https://travis-ci.org/samuelbwambale/my_diary)[![Coverage Status](https://coveralls.io/repos/github/samuelbwambale/my_diary/badge.svg?branch=CHALLENGE-THREE-v2)](https://coveralls.io/github/samuelbwambale/my_diary?branch=CHALLENGE-THREE-v2)[![Maintainability](https://api.codeclimate.com/v1/badges/664c55f5d7a35cfc08e4/maintainability)](https://codeclimate.com/github/samuelbwambale/my_diary/maintainability)
+
 
 # My Diary
 
@@ -25,24 +26,17 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 ### Prerequisites
   1.	HTML/CSS
   2.	Javascript/ES6
-  3.	Python/Flask
+  3.	Python 3
+  4. Flask
+  4. 	Postgres DB
 
-## Technologies
-
-* Python 3.6 and above
-* Flask Restful
-
-
-## Requirements
+## Setup
 
 * Install [Python](https://www.python.org/downloads/)
 * Run `pip install virtualenv` on command prompt
 * Run `pip install virtualenvwrapper` on command prompt
 * Run `export WORKON_HOME=~/Envs` on command prompt
 * Run `source /usr/local/bin/virtualenvwrapper.sh` on command prompt
-
-## Setup
-
 * Run `mkvirtualenv env-name` on command prompt
 * Run `workon env-name` on command prompt
 * Run `git clone` this repository and `cd` into the project root.
@@ -56,12 +50,16 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 ## Tests
 
 * Run `pytest tests` on command prompt
+* Run `pytest --cov=. tests/` to get test coverage
 
 ### GitHub pages
 
-View the userinterface at (https://samuelbwambale.github.io/my_diary/UI/home.html)
+View the user interface here: https://samuelbwambale.github.io/my_diary/UI/home.html
 
 ### Heroku
 
-The app is accessible on Heroku at (https://sb-my-diary.herokuapp.com/)
+The app is accessible on Heroku here: https://sb-my-diary.herokuapp.com/
 
+### API Documentation
+
+The documentation can be accessed here:https://app.apiary.io/mydiaryapi2/editor
