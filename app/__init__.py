@@ -5,11 +5,11 @@ from config import config
 
 app = Flask(__name__)
 """ Initialize the flask application """
-from app.api.database import DatabaseConnection
-db = DatabaseConnection()
-db.create_table_users()
-db.create_table_entries()
-""" Create the tables for users and entries """
+# from app.api.database import DatabaseConnection
+# db = DatabaseConnection()
+# db.create_table_users()
+# db.create_table_entries()
+# """ Create the tables for users and entries """
 
 jwt = JWTManager(app)
 app.config['SECRET_KEY'] = 'alibaba'

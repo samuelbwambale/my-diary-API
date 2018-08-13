@@ -45,3 +45,10 @@ class DatabaseConnection:
     def stop_connection(self):
         self.cursor.close()
         self.connection.close()
+
+
+if __name__ == "__main__":
+    conn = DatabaseConnection()
+    conn.create_table_users()
+    conn.create_table_entries()
+    conn.stop_connection()
