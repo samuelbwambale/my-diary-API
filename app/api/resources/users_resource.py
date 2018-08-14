@@ -45,7 +45,7 @@ class UserRegister(Resource):
             user.add_user()
             return make_response(jsonify({
                 'status': "success",
-                'message': 'User Successfully Created!!',
+                'message': 'Account successfully created',
                 }), 201)
         except Exception as err:
             return {'message': '{}'.format(err)}, 500 
