@@ -1,13 +1,14 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS
 from config import config
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 """ Initialize the flask application """
 CORS(app)
-""" Enable cross-origin resource sharing """
+""" Enable CORS on the app """
+
 
 app.config.from_object(config['development'])
 jwt = JWTManager(app)
