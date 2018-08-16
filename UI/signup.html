@@ -22,19 +22,19 @@
             <div class="bg-landingpage">
                 <div class="row justify-content-center ">
                     <div class="col-sm-8 col-md-4">
-                            <form class="form-signin text-left mt-4">
+                            <form class="form-signin text-left mt-4" id="register-form">
                                 <h2 class="h3 mb-3 font-weight-normal">Please fill in your details</h2>
-                                <label for="usr">Name</label>
-                                <input type="text" id="inputName" placeholder="Enter your full name" required>
+                                First name<br>
+                                <input type="text" id="first_name" placeholder="Enter your first name" autocomplete="first_tname" required>
+    
+                                Last name<br>
+                                <input type="text" id="last_name" placeholder="Enter your last name" autocomplete="last_tname" required>
      
-                                <label for="inputEmail">Email address</label>
-                                <input type="email" id="inputEmail" placeholder="Enter email address" required>
+                                Email address<br>
+                                <input type="email" id="email" placeholder="Enter email address" autocomplete="email" required>
 
-                                <label for="inputPassword">Password</label>
-                                <input type="password" id="inputPassword" class="form-control" placeholder="Set your password" required>
-
-                                <label for="inputPassword">Repeat Password</label>
-                                <input type="password" id="inputPassword" class="form-control" placeholder="Enter password again" required>
+                                Password<br>
+                                <input type="password" id="password" class="form-control" placeholder="Set your password" autocomplete="password" required>
 
                                 <div class="checkbox mb-3">
                                     <label>
@@ -43,9 +43,12 @@
                                 </div>
                                 <div style="text-align: center">
                                     <a href="home.html"><button class="btn btn-cancel">Cancel</button></a>
-                                    <a href="home.html"><button class="btn btn-submit">Sign up</button></a>
+                                    <button class="btn btn-submit" type="submit" onclick="signup()">Sign up</button>
                                 </div>
                             </form>
+                            <div>
+                                <p id="signup-response"></p>                                
+                            </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +60,8 @@
             </div>
         </footer>
         </div>
-
+        
+    <script src="js/users.js"></script>
 </body>
 
 </html>
