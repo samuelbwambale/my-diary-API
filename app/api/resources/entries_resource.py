@@ -107,7 +107,7 @@ class EntryListResource(Resource):
                 entries.append(entry)
             return make_response(jsonify({
                 'status': 'success',
-                'Entries': entries
+                'entries': entries
                 }), 200) 
 
 
@@ -139,7 +139,7 @@ class EntryListResource(Resource):
                 entry.add_an_entry()
                 return make_response(jsonify({
                     'status': 'success',
-                    'message': 'Entry successfully created!',
+                    'message': 'Entry successfully created',
                 }), 201)
             except Exception as err:
                 return {'message': '{}'.format(err)}, 500

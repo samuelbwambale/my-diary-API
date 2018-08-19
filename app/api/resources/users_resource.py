@@ -70,8 +70,8 @@ class UserLogin(Resource):
             
             return make_response(jsonify({
                 'status': "success",
-                'message': "Logged in",
-                'Token'  : token
+                'message': "Successfully logged in",
+                'token'  : token
                 }), 200)
         else:
             return make_response(jsonify({
