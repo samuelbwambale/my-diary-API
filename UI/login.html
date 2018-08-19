@@ -5,7 +5,7 @@
     <title>Log In</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">    
 </head>
 
 <body>
@@ -22,20 +22,20 @@
             <div class="bg-landingpage">
                 <div class="row justify-content-center ">
                     <div class="col-sm-8 col-md-3">
-                        <form class="form-signin text-left mt-4">
+                        <form class="form-signin text-left mt-4" id="login_form" >
                             <h2 class="h3 mb-3 font-weight-normal">Please log in</h2>
-                                <label for="inputEmail">Email address</label>
-                                <input type="email" id="inputEmail" placeholder="Enter email address" required autofocus>
-
-                                <label for="inputPassword">Password</label>
-                                <input type="password" id="inputPassword" class="form-control" placeholder="Enter password" required>
-
+                                <p style="color: firebrick;" id="login_response"></p>
+                                Email address<br>
+                                <input type="email" id="email" placeholder="Enter email address" autocomplete="email" required>
+                                Password<br>
+                                <input type="password" id="password" placeholder="Enter password" autocomplete="password" required>
+                                
                                 <div class="checkbox mb-3">
                                     <label>
                                         <input type="checkbox" value="remember-me"> Remember me
                                     </label>
                                 </div>
-                                <a href="home.html"><button class="btn" type="submit">Log in</button></a>
+                                <button id="login_submit" class="btn" type="submit" >Log in</button>
                                 <div style="text-align: center">
                                     Have no account? <a href="signup.html">Sign up</a>
                                 </div>
@@ -51,7 +51,7 @@
             </div>
         </footer>
     </div>
-
+    <script src="js/login.js"></script>
 </body>
 
 </html>

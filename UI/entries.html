@@ -22,49 +22,31 @@
         <div class="container-fluid">
             <div class="bg-landingpage">
                 <div class="row justify-content-center ">
-                    <div class="col-sm-4 col-md-8">
+                    <div class="col-sm-4 col-md-8" id="all_entries_div">
                             
-                            <h3 class="mt-5">Here are your previous diary entries</h3>
-                            <p>
-                                <input type="text" placeholder="Search ....">
-                            </p>
-                            <ul id="previous-entries">
-                                <li class="floating-box">
-                                    <label style="font-weight: bold">How I learnt programming ...</label>
+                        <h3 class="mt-5">Here are your previous diary entries</h3>
+                        <p>
+                            <input type="text" placeholder="Search ....">
+                        </p>
+                        <p style="color: firebrick;" id="view_entry_response"></p> 
+                        <button onclick="view_entries()" id="get_entries_button" class="btn-edit">View</button>
+                        <div id="entry_output"></div>
+                        <ul id="previous-entries">
+                            <li class="floating-box">
+                                    <label style="font-weight: bold">My 30th birthday celebration ...</label>
                                     <div>
                                         <button class="btn-edit">View</button>
                                         <button class="btn-delete-entry">Delete</button>
                                     </div>
-                                </li>
-                                <li class="floating-box">
-                                    <label style="font-weight: bold">Preparing mushroom sauce in 5min ...</label>
-                                    <div>
-                                        <a href="view_entry.html"><button class=" btn-edit">View</button></a>
-                                        <a href="view_entry.html"><button class="btn-delete-entry">Delete</button></a>
-                                    </div>
-                                </li>
-                                <li class="floating-box">
-                                        <label style="font-weight: bold">My 30th birthday celebration ...</label>
-                                        <div>
-                                            <button class="btn-edit">View</button>
-                                            <button class="btn-delete-entry">Delete</button>
-                                        </div>
-                                </li>
-                            </ul>
-                            <a href="add-entry.html"><button class="btn mt-5">New Entry</button></a>
+                            </li>
+                        </ul>
+                        <a href="add-entry.html"><button class="btn mt-5">New Entry</button></a>
                     </div>
                 </div>
             </div>
         </div>     
-
-        <footer class="footer">
-            <div class="container">
-                <p class="mt-5 mb-3 text-muted text-center">&copy; sbwambale </p>
-            </div>
-        </footer>
     </div>
-
-
+    <script src="js/entries.js"></script>
 </body>
 
 </html>
