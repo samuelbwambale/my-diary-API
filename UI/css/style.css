@@ -261,6 +261,13 @@ li.dropdown {
   
 }
 
+.entry-div {
+  margin: 8px 0;
+  margin-bottom: 1rem;
+  border: #5f044b;
+
+}
+
 
 
 .form-signin {
@@ -271,7 +278,7 @@ li.dropdown {
     margin: auto;
     background-color: white;
     color: rgb(190, 151, 151);
-    overflow: auto;    
+    overflow: auto;  
       }
 
 .form-entry {
@@ -367,6 +374,8 @@ ol ol, ul ul, ol ul, ul ol {
 img {
     vertical-align: middle;
     border-style: none; }
+
+
 
 
 .floating-box {
