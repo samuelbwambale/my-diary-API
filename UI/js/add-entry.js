@@ -22,7 +22,11 @@ function signup(e){
         if(data.message === "Entry successfully created"){
         alert(data.message)
         window.location.href = "./entries.html"
-        } else{
+        } else if(data.message === "Internal Server Error"){
+          let res = "Session has expired, please login and try again"
+          alert(res)
+          window.location.href = "./login.html"        
+      } else{
             document.getElementById('add_entry_response').innerHTML = "Error : " + data.message;
         }        
     })
