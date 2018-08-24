@@ -226,12 +226,17 @@ li.dropdown {
         background-color: rgba(85, 187, 71, 0.781);
       }
 
-.btn-cancel {
+.btn-cancel-entry {
         float: left;
         width: 40%;
         max-width: 100px;
         color: #f2f2f2;
         background-color: red;
+      }
+
+.btn-cancel {      
+      color: #f2f2f2;
+      background-color: rgb(190, 151, 151);
       }
 
 
@@ -262,9 +267,15 @@ li.dropdown {
 }
 
 .entry-div {
-  margin: 8px 0;
   margin-bottom: 1rem;
-  border: #5f044b;
+  border: 2px  #5f044b;
+  color: rgb(73, 35, 35);
+
+}
+
+.entry-title{
+  color: #5f044b;
+  font-weight: bolder;
 
 }
 
@@ -312,6 +323,14 @@ input[type=text], input[type=email], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     }
+
+  [contenteditable="true"] {
+      background-color: rgb(236, 230, 230);
+  }
+  
+  [contenteditable="true"]:focus {
+      background-color: whitesmoke;
+  }
 
   
 textarea {
@@ -380,7 +399,7 @@ img {
 
 .floating-box {
       display: inline-block;
-      width: 200px;
+      width: 300px;
       height: 150px;
       margin: 10px;
       border: 3px solid rgb(190, 151, 151); 
@@ -388,7 +407,6 @@ img {
       border: 1px solid rgba(0, 0, 0, 0.125);
       border-radius: 0.25rem;
       flex-direction: column;
-      background-color: #ddd;
      }
   
 
@@ -406,7 +424,7 @@ img {
 }
 
 .floating-box:hover, .floating-box-big:hover {
-  background-color: #ddd;
+  background-color: rgb(247, 243, 243);
   border: 1px solid #777;
 }
 
