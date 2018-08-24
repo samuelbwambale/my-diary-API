@@ -137,7 +137,5 @@ class EntriesApiTestCase(BaseTestCase):
         }
         response = self.app.put("/api/v1/entries/1",
         data = json.dumps(edit_details), headers = self.header, content_type='application/json')
-        self.assertEqual(response.status_code, 404)
-
-   
+        self.assertEqual(response.status_code, 404)   
     
