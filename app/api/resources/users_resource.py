@@ -78,15 +78,7 @@ class UserLogin(Resource):
                 'status': "failed",
                 'message': "Invalid username or password."
                 }), 401)
-
-
-class UserLogout(Resource):
-    def post(self):
-        """ Method to logout a user """
-        return make_response(jsonify({
-            'status': "success",
-            'message':'Logged out successfully'}), 200)
-        
+                        
 
 class UserListResource(Resource):
     def get(self):
