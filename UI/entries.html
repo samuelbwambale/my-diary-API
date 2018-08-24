@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="get_entries()">
     <div class="container-fluid">
             <nav class="topnav">
                 <a class="nav-link active" href="home.html">MyDiary</a>
                 <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
                     <a class="nav-link active" href="home.html">Home</a>
                     <a class="nav-link active" href="add-entry.html">Add Entry</a>
-                    <a class="nav-link active" href="login.html">Sign Out</a>
+                    <a class="nav-link active" onclick="logout()">Sign Out</a>
                 </div>
             </nav>
 
@@ -23,8 +23,7 @@
             <div class="bg-landingpage">
                 <div class="row justify-content-center ">
                     <div class="col-sm-4 col-md-4" id="all_entries_div">
-                        <button onclick="get_entries()" id="get_entries_button" class="btn btn-edit mt-2 mb-3">View All Entries</button>
-                        <p style="color: firebrick;" id="view_entries_response"></p> 
+                        <p style="color: firebrick;" class="mt-5" id="view_entries_response"></p> 
                         <div id="entries_output"></div>
                         <!-- <ul id="previous-entries">
                             <li class="floating-box">
@@ -35,13 +34,14 @@
                                     </div>
                             </li>
                         </ul> -->
-                        <a href="add-entry.html"><button class="btn mt-5">Add Entry</button></a>
+                        <a href="add-entry.html"><button class="btn mt-3">Add New Entry</button></a>
                     </div>
                 </div>
             </div>
         </div>     
     </div>
     <script src="js/entries.js"></script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>
