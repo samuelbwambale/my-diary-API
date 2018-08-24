@@ -48,7 +48,7 @@ class EntryResource(Resource):
         if not result:
             return make_response(jsonify({
             'status': 'failed',
-            'message': 'Entry with this ID not found.',
+            'message': 'Entry not found.',
             }), 404)
         if result[4].strftime("%Y-%m-%d") == now.strftime("%Y-%m-%d"):
             if data["description"].strip() == "":
@@ -56,18 +56,18 @@ class EntryResource(Resource):
                     'status': 'failed',
                     'message': 'The new description can not be empty.'}), 400)
 
-            if len(data["description"].strip()) < 6:
+            if len(data["description"].strip()) < 4:
                 return make_response(jsonify({
                     'status': 'failed',
-                    'message': 'Description should be at least 6 characters long.'}), 400)
+                    'message': 'Description should be at least 4 characters long.'}), 400)
             ent.update_an_entry(entry_id, data['description'], owner_id)
             return make_response(jsonify({
                 'status': 'success',
-                'message': 'Entry edited successfully.',
+                'message': 'Entry edited successfully',
                 }), 200)
         return make_response(jsonify({
             'status': 'failed',
-            'message': 'You can only edit and entry on the day it was created!',
+            'message': 'You can only edit an entry on the day it was created. Alternatively, you can add a new entry',
             }), 401)    
 
     @jwt_required      
@@ -85,7 +85,7 @@ class EntryResource(Resource):
             ent.delete_an_entry(entry_id, owner_id)
             return make_response(jsonify({
             'status': 'success',
-            'message': 'Entry deleted.'
+            'message': 'Selected entry has been deleted'
             }), 200)        
     
 
