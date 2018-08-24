@@ -92,7 +92,7 @@ class EntriesApiTestCase(BaseTestCase):
         response = self.app.get('/api/v1/entries', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
-    def test_a_single_entry_not(self):
+    def test_get_a_single_entry(self):
         self.create_test_entry()
         response = self.app.get('/api/v1/entries/1', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
@@ -138,4 +138,6 @@ class EntriesApiTestCase(BaseTestCase):
         response = self.app.put("/api/v1/entries/1",
         data = json.dumps(edit_details), headers = self.header, content_type='application/json')
         self.assertEqual(response.status_code, 404)
+
+   
     
