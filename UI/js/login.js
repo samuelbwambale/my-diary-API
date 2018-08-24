@@ -20,11 +20,16 @@ function login(e){
     .then(function(data) {
         if(data.message === "Successfully logged in"){
             sessionStorage.setItem('token', data.token);
-            alert(data.message)
             window.location.href = "./home.html"
         } else{
-            document.getElementById('login_response').innerHTML = "Error : " + data.message;
+            document.getElementById('login_response').innerHTML = "Error : " + data.message
+            window.location.href = "./entries.html"
         }        
     })
     .catch(error => console.log(error))
+}
+
+function logout() {
+	sessionStorage.removeItem('token');
+	window.location.href = './login.html';
 }
