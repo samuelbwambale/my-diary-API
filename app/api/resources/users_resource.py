@@ -5,6 +5,7 @@ from flask_jwt_extended import create_access_token
 import re
 from app.api.models.users import User
 
+
 class UserRegister(Resource):
     def post(self):
         """ Method to signup a user """
