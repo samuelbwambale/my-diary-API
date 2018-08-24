@@ -54,14 +54,6 @@ class Entry(DatabaseConnection):
         result = self.cursor.fetchone()
         return result
 
-
-    def get_entry_by_id(self, entry_id):
-        """ Fetch a single entry """
-        query = "SELECT * FROM entries WHERE entry_id = %s"
-        self.cursor.execute(query, [entry_id])
-        result = self.cursor.fetchone()
-        return result
-
             
     def check_entry_with_title_exists(self, title):
         """ Check if there exists an entry with parsed title """
@@ -70,10 +62,3 @@ class Entry(DatabaseConnection):
         result = self.cursor.rowcount
         return result
 
-
-    def check_entry_with_id_exists( self, entry_id):
-        """ Check if entry with parsed Id exists """
-        query = "SELECT * FROM entries WHERE entry_id = %s"
-        self.cursor.execute(query, [entry_id])
-        result = self.cursor.rowcount
-        return result

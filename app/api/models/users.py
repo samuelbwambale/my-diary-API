@@ -48,3 +48,10 @@ class User(DatabaseConnection):
         self.cursor.execute(query,[email])
         result = self.cursor.rowcount
         return result
+
+    def get_user_by_id(self, user_id):
+        """ Get a user by id """
+        query = "SELECT * FROM users WHERE user_id = %s"
+        self.cursor.execute(query,[user_id])
+        result = self.cursor.fetchone()
+        return result
