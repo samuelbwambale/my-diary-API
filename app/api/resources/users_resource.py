@@ -1,9 +1,10 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 from datetime import timedelta
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import re
 from app.api.models.users import User
+from app.api.models.entries import Entry
 
 
 class UserRegister(Resource):
@@ -74,11 +75,10 @@ class UserLogin(Resource):
                 'message': "Successfully logged in",
                 'token'  : token
                 }), 200)
-        else:
-            return make_response(jsonify({
-                'status': "failed",
-                'message': "Invalid username or password."
-                }), 401)
+        return make_response(jsonify({
+            'status': "failed",
+            'message': "Invalid username or password."
+            }), 401)
                         
 
 class UserListResource(Resource):
@@ -90,12 +90,32 @@ class UserListResource(Resource):
             return make_response(jsonify({
                 'message': 'No users subscribed as yet',
                 }), 200)
-        else:
-            user_lst = []
-            for u in users:
-                user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
-                user_lst.append(user)
+        user_lst = []
+        for u in users:
+            user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
+            user_lst.append(user)
+        return make_response(jsonify({
+            'status': 'success',
+            'users': user_lst
+            }), 200)
+
+
+class UserResource(Resource):
+    @jwt_required
+    def get(self, user_id):
+        """ Method to get a user's details """
+        usr = User(None, None, None, None )
+        user_id = get_jwt_identity()
+        user = usr.get_user_by_id(user_id)
+        if user:
+            ent = Entry(None, None, None)
+            result = ent.get_all_entries(user_id)
+            count = len(result)
+            user_profile= {"user_id":user[0], "first_name":user[1], "last_name":user[2], "email":user[3], "entries_count":count}
             return make_response(jsonify({
                 'status': 'success',
-                'entry': user_lst
+                'profile': user_profile
                 }), 200)
+        return make_response(jsonify({
+            'message': 'User not found',
+            }), 200)
