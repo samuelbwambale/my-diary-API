@@ -43,14 +43,12 @@ class UserRegister(Resource):
                         'status': "failed",
                         'message': 'This email is already used',
                         }), 400)
-        try:
-            user.add_user()
-            return make_response(jsonify({
-                'status': "success",
-                'message': 'Account successfully created',
-                }), 201)
-        except Exception as err:
-            return {'message': '{}'.format(err)}, 500 
+        
+        user.add_user()
+        return make_response(jsonify({
+            'status': "success",
+            'message': 'Account successfully created',
+            }), 201)
 
 
 class UserLogin(Resource):
@@ -118,4 +116,4 @@ class UserResource(Resource):
                 }), 200)
         return make_response(jsonify({
             'message': 'User not found',
-            }), 200)
+            }), 404)
