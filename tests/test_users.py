@@ -119,14 +119,6 @@ class UsersApiTestCase(BaseTestCase):
 
     def test_get_all_users(self):
         self.create_test_user()
-        usr = {
-            "first_name": "Isaac",
-            "last_name": "Newton",
-            "email": "newsnewton@gmail.com", 
-            "password": "password",
-        }
-        self.app.post("/api/v1/auth/signup",
-        data=json.dumps(usr), content_type='application/json')
         response = self.app.get('/api/v1/users', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
