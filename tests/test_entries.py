@@ -6,6 +6,10 @@ entry = {
             'title': 'Go to Jinja',
             'description': 'Today am going cycling'
         }
+entry2 = {
+            'title': 'Read a book',
+            'description': 'How to remove Museveni'
+        }
 
 user = {
             "first_name": "Alex",
@@ -25,6 +29,8 @@ class EntriesApiTestCase(BaseTestCase):
         self.create_test_user()
         self.app.post("/api/v1/entries",
         data = json.dumps(entry), headers = self.header, content_type='application/json')
+        self.app.post("/api/v1/entries",
+        data = json.dumps(entry2), headers = self.header, content_type='application/json')
       
 
     def test_add_an_entry(self):
@@ -98,6 +104,7 @@ class EntriesApiTestCase(BaseTestCase):
 
 
     def test_get_all_entries(self):
+        self.create_test_entry()
         response = self.app.get('/api/v1/entries', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
