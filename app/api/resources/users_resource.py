@@ -102,7 +102,7 @@ class UserListResource(Resource):
 
 class UserResource(Resource):
     @jwt_required
-    def get(self, user_id):
+    def get(self):
         """ Method to get a user's details """
         usr = User(None, None, None, None )
         user_id = get_jwt_identity()

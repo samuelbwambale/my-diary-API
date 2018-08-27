@@ -29,9 +29,9 @@ function update_an_entry(){
         alert(data.message)
         window.location.href = "./entries.html"
         } else if(data.message === "Internal Server Error"){
-          let res = "Session has expired, please login and try again"
+          let res = "Please login to proceed"
           alert(res)
-          window.location.href = "./login.html"        
+          window.location.href = "./index.html"        
       } else{
             document.getElementById('view_entries_response').innerHTML = "Error : " + data.message;
         }        
@@ -54,20 +54,21 @@ function get_entries(){
         let entries_output = '<h2 style = "color: #5f044b;" class="mb-4">My Entries</h4>'
         data.entries.forEach(entry => {
             entries_output += `
-            <div class="entry-div">
+            <div class="entry-div card">
                 <h3><a href="#" onclick="get_an_entry(${entry.entry_id})">${entry.title}</a>
                 </h3>
                 <p>${entry.description}</p>
-                <p class="mb-5">${entry.create_date}</p>
-            <div>
+                <p>${entry.create_date}</p>
+            </div>
+            <p class="mb-5"></p>
             `
         })
         document.getElementById('entries_output').innerHTML = entries_output
         }
         else if(data.message === "Internal Server Error"){
-            let res = "Session has expired, please login and try again"
+            let res = "Please login to proceed"
             alert(res)
-            window.location.href = "./login.html"
+            window.location.href = "./index.html"
 
         } else {
             document.getElementById('view_entries_response').innerHTML = data.message
@@ -89,22 +90,22 @@ function get_an_entry(id){
         response.json().then(function(data) {
             if(data.status === "success"){
                 let entries_output = `
-                <div class="entry-div">
+                <div class="entry-div card">
                     <h2 class="entry-title">${data.entry.title}</h2>
                     <p id='entryid' style="display: none;" >${data.entry.entry_id}</p>
                     <p id="desc" contenteditable="false" >${data.entry.description}</p>
                     <button id="editbtn" class="btn-edit" onclick="changediv()">Edit</button>
                     <button onclick="delete_an_entry(${data.entry.entry_id})" class="btn-delete-entry">Delete</button>
                     <button class="btn-cancel" onclick="window.location='./entries.html'">Cancel</button>
-
-                <div>
+                    <p class="mb-2"></p>
+                </div>
                 ` 
                 document.getElementById('entries_output').innerHTML = entries_output
             }
             else if(data.message === "Internal Server Error"){
-                let res = "Session has expired, please login and try again"
+                let res = "Please login to proceed"
                 alert(res)
-                window.location.href = "./login.html"        
+                window.location.href = "./index.html"        
             } else {
                     document.getElementById('view_entries_response').innerHTML = data.message
                 }
@@ -128,9 +129,9 @@ function delete_an_entry(id){
                 alert(data.message)
                 window.location.href = "./entries.html"
             } else if(data.message === "Internal Server Error"){
-                let res = "Session has expired, please login and try again"
+                let res = "Please login to proceed"
                 alert(res)
-                window.location.href = "./login.html"        
+                window.location.href = "./index.html"        
             } else{
                     document.getElementById('view_entries_response').innerHTML = data.message
                 }
@@ -138,9 +139,3 @@ function delete_an_entry(id){
     })   
     .catch(error => console.log(error))
 }
-
-
-
-function test_log_something(){
-    console.log(12345)
-    }

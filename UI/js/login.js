@@ -23,7 +23,6 @@ function login(e){
             window.location.href = "./home.html"
         } else{
             document.getElementById('login_response').innerHTML = "Error : " + data.message
-            window.location.href = "./entries.html"
         }        
     })
     .catch(error => console.log(error))
@@ -31,5 +30,5 @@ function login(e){
 
 function logout() {
 	sessionStorage.removeItem('token');
-	window.location.href = './login.html';
+	window.location.href = './index.html';
 }

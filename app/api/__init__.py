@@ -17,4 +17,4 @@ from .resources.users_resource import UserResource
 api.add_resource(UserListResource,'/users')
 api.add_resource(UserRegister,'/auth/signup')
 api.add_resource(UserLogin,'/auth/login')
-api.add_resource(UserResource,'/users/<int:user_id>')
+api.add_resource(UserResource,'/user')

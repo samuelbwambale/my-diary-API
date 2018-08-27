@@ -325,7 +325,7 @@ input[type=text], input[type=email], input[type=password] {
     }
 
   [contenteditable="true"] {
-      background-color: rgb(236, 230, 230);
+      background-color: #ccc;
   }
   
   [contenteditable="true"]:focus {
@@ -427,6 +427,19 @@ img {
   background-color: rgb(247, 243, 243);
   border: 1px solid #777;
 }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  max-width: auto;
+  margin: auto;
+  text-align: center;
+}
+
+.card:hover {
+  background-color: #f7f3f3e5;
+  border: 1px solid #777;
+}
+
 
 .img-box {
   width: auto;

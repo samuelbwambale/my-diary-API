@@ -1,5 +1,5 @@
-document.getElementById("add_entry_form").addEventListener("submit", signup)
-function signup(e){
+document.getElementById("add_entry_form").addEventListener("submit", add_entry)
+function add_entry(e){
     e.preventDefault();
 
     let title = document.getElementById('title').value
@@ -23,9 +23,9 @@ function signup(e){
         alert(data.message)
         window.location.href = "./entries.html"
         } else if(data.message === "Internal Server Error"){
-          let res = "Session has expired, please login and try again"
+          let res = "Please login to proceed"
           alert(res)
-          window.location.href = "./login.html"        
+          window.location.href = "./index.html"        
       } else{
             document.getElementById('add_entry_response').innerHTML = "Error : " + data.message;
         }        
