@@ -128,15 +128,12 @@ class EntryListResource(Resource):
                 'status': "failed",
                 'message': 'Entry with same title already exists!',
                 }), 400)
-        else:
-            try:                
-                owner_id = get_jwt_identity()
-                entry = Entry(data['title'], data['description'], owner_id)
-                entry.add_an_entry()
-                return make_response(jsonify({
-                    'status': 'success',
-                    'message': 'Entry successfully created',
-                }), 201)
-            except Exception as err:
-                return {'message': '{}'.format(err)}, 500
+                       
+        owner_id = get_jwt_identity()
+        entry = Entry(data['title'], data['description'], owner_id)
+        entry.add_an_entry()
+        return make_response(jsonify({
+            'status': 'success',
+            'message': 'Entry successfully created',
+        }), 201)
             

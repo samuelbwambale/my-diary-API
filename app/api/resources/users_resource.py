@@ -43,7 +43,6 @@ class UserRegister(Resource):
                         'status': "failed",
                         'message': 'This email is already used',
                         }), 400)
-        
         user.add_user()
         return make_response(jsonify({
             'status': "success",
