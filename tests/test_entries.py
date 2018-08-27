@@ -87,6 +87,15 @@ class EntriesApiTestCase(BaseTestCase):
         data = json.dumps(entry), headers = self.header, content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
+    def test_add_entry_with_empty_title(self):
+        entry = {
+            'title': '',
+            'description': 'On Sunday'
+        }
+        response = self.app.post("/api/v1/entries",
+        data = json.dumps(entry), headers = self.header, content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
 
     def test_get_all_entries(self):
         response = self.app.get('/api/v1/entries', headers = self.header, content_type = 'application/json')
@@ -121,7 +130,16 @@ class EntriesApiTestCase(BaseTestCase):
         data = json.dumps(edit_details), headers = self.header, content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
-    def test_edit_an_entry_with_invalid_description(self):
+    def test_edit_an_entry_with_empty_description(self):
+        self.create_test_entry()
+        edit_details = {
+            'description': ''
+        }
+        response = self.app.put("/api/v1/entries/1",
+        data = json.dumps(edit_details), headers = self.header, content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_edit_an_entry_with_description_less_than_4_characters(self):
         self.create_test_entry()
         edit_details = {
             'description': 'For'
@@ -133,7 +151,7 @@ class EntriesApiTestCase(BaseTestCase):
     def test_edit_an_entry_that_does_not_exist(self):
         self.create_test_user()
         edit_details = {
-            'description': 'For'
+            'description': 'For testing'
         }
         response = self.app.put("/api/v1/entries/1",
         data = json.dumps(edit_details), headers = self.header, content_type='application/json')
