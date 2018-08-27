@@ -113,12 +113,7 @@ class UsersApiTestCase(BaseTestCase):
 
     def test_get_user_details(self):
         self.create_test_user()
-        response = self.app.get('/api/v1/users/1', headers = self.header, content_type = 'application/json')
-        self.assertEqual(response.status_code, 200)
-
-    def test_get_non_existng_user(self):
-        self.create_test_user()
-        response = self.app.get('/api/v1/users/2', headers = self.header, content_type = 'application/json')
+        response = self.app.get('/api/v1/user', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
     
     def test_get_user_by_email(self):
