@@ -25,6 +25,11 @@ class UserRegister(Resource):
                 'status': 'failed',
                 'message': 'The fistname or lastname or email or password can not be empty.'
                 }), 400)
+        if (not data['first_name'].isalpha()) or (not data['last_name'].isalpha()):
+            return make_response(jsonify({
+                'status': 'failed',
+                'message': 'Firstname or Lastname is invalid'
+                }), 400)
         if not re.match("[^@]+@[^@]+\.[^@]+", data['email']):
             return make_response(jsonify({
                 'status': 'failed',
