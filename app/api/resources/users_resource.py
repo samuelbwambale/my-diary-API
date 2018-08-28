@@ -1,9 +1,11 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
 from datetime import timedelta
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import re
 from app.api.models.users import User
+from app.api.models.entries import Entry
+
 
 class UserRegister(Resource):
     def post(self):
@@ -23,6 +25,11 @@ class UserRegister(Resource):
                 'status': 'failed',
                 'message': 'The fistname or lastname or email or password can not be empty.'
                 }), 400)
+        if (not data['first_name'].isalpha()) or (not data['last_name'].isalpha()):
+            return make_response(jsonify({
+                'status': 'failed',
+                'message': 'Firstname or Lastname is invalid'
+                }), 400)
         if not re.match("[^@]+@[^@]+\.[^@]+", data['email']):
             return make_response(jsonify({
                 'status': 'failed',
@@ -41,14 +48,11 @@ class UserRegister(Resource):
                         'status': "failed",
                         'message': 'This email is already used',
                         }), 400)
-        try:
-            user.add_user()
-            return make_response(jsonify({
-                'status': "success",
-                'message': 'Account successfully created',
-                }), 201)
-        except Exception as err:
-            return {'message': '{}'.format(err)}, 500 
+        user.add_user()
+        return make_response(jsonify({
+            'status': "success",
+            'message': 'Account successfully created',
+            }), 201)
 
 
 class UserLogin(Resource):
@@ -70,23 +74,14 @@ class UserLogin(Resource):
             
             return make_response(jsonify({
                 'status': "success",
-                'message': "Logged in",
-                'Token'  : token
+                'message': "Successfully logged in",
+                'token'  : token
                 }), 200)
-        else:
-            return make_response(jsonify({
-                'status': "failed",
-                'message': "Invalid username or password."
-                }), 401)
-
-
-class UserLogout(Resource):
-    def post(self):
-        """ Method to logout a user """
         return make_response(jsonify({
-            'status': "success",
-            'message':'Logged out successfully'}), 200)
-        
+            'status': "failed",
+            'message': "Invalid username or password."
+            }), 401)
+                        
 
 class UserListResource(Resource):
     def get(self):
@@ -97,12 +92,32 @@ class UserListResource(Resource):
             return make_response(jsonify({
                 'message': 'No users subscribed as yet',
                 }), 200)
-        else:
-            user_lst = []
-            for u in users:
-                user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
-                user_lst.append(user)
+        user_lst = []
+        for u in users:
+            user= {"user_id":u[0], "first_name":u[1], "last_name":u[2], "email":u[3], "password":u[4]}
+            user_lst.append(user)
+        return make_response(jsonify({
+            'status': 'success',
+            'users': user_lst
+            }), 200)
+
+
+class UserResource(Resource):
+    @jwt_required
+    def get(self):
+        """ Method to get a user's details """
+        usr = User(None, None, None, None )
+        user_id = get_jwt_identity()
+        user = usr.get_user_by_id(user_id)
+        if user:
+            ent = Entry(None, None, None)
+            result = ent.get_all_entries(user_id)
+            count = len(result)
+            user_profile= {"user_id":user[0], "first_name":user[1], "last_name":user[2], "email":user[3], "entries_count":count}
             return make_response(jsonify({
                 'status': 'success',
-                'entry': user_lst
+                'profile': user_profile
                 }), 200)
+        return make_response(jsonify({
+            'message': 'User not found',
+            }), 404)

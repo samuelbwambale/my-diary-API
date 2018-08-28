@@ -13,8 +13,8 @@ api.add_resource(EntryResource,'/entries/<int:entry_id>')
 from .resources.users_resource import UserListResource
 from .resources.users_resource import UserRegister
 from .resources.users_resource import UserLogin
-from .resources.users_resource import UserLogout
+from .resources.users_resource import UserResource
 api.add_resource(UserListResource,'/users')
 api.add_resource(UserRegister,'/auth/signup')
 api.add_resource(UserLogin,'/auth/login')
-api.add_resource(UserLogout,'/auth/logout')
+api.add_resource(UserResource,'/user')

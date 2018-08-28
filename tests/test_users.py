@@ -25,6 +25,10 @@ logins = {
 
 class UsersApiTestCase(BaseTestCase):
 
+    def create_test_user(self):
+        self.app.post("/api/v1/auth/signup",
+        data=json.dumps(user), content_type='application/json')
+
     def test_register_user(self):
         response = self.app.post("/api/v1/auth/signup",
         data=json.dumps(user), content_type='application/json')        
@@ -44,6 +48,28 @@ class UsersApiTestCase(BaseTestCase):
             "last_name": "Newton",
             "email": "newsboygmail.com", 
             "password": "password",
+        }
+        response = self.app.post("/api/v1/auth/signup",
+        data=json.dumps(user), content_type='application/json')        
+        self.assertEqual(response.status_code, 400)
+
+    def test_register_with_with_invalid_first_name(self):
+        user = {
+            "first_name": "Isaac",
+            "last_name": "Newton42",
+            "email": "newsboy@gmail.com", 
+            "password": "password",
+        }
+        response = self.app.post("/api/v1/auth/signup",
+        data=json.dumps(user), content_type='application/json')        
+        self.assertEqual(response.status_code, 400)
+
+    def test_register_with_with_password_less_than_four_chars(self):
+        user = {
+            "first_name": "Isaac",
+            "last_name": "Newton",
+            "email": "newsboy@gmail.com", 
+            "password": "pas",
         }
         response = self.app.post("/api/v1/auth/signup",
         data=json.dumps(user), content_type='application/json')        
@@ -73,8 +99,7 @@ class UsersApiTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_login(self):
-        self.app.post("/api/v1/auth/signup",
-        data=json.dumps(user), content_type='application/json')
+        self.create_test_user()
         response = self.app.post("/api/v1/auth/login",
         data=json.dumps(logins), content_type='application/json')
         self.assertEqual(response.status_code, 200)
@@ -85,8 +110,7 @@ class UsersApiTestCase(BaseTestCase):
             "email": "news@gmail.com", 
             "password": "password",
         }
-        self.app.post("/api/v1/auth/signup",
-        data=json.dumps(user), content_type='application/json')
+        self.create_test_user()
         response = self.app.post("/api/v1/auth/login",
         data=json.dumps(logins), content_type='application/json')
         self.assertEqual(response.status_code, 401)
@@ -105,21 +129,38 @@ class UsersApiTestCase(BaseTestCase):
 
 
     def test_get_all_users(self):
+        self.create_test_user()
         response = self.app.get('/api/v1/users', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
+
+    def test_get_all_users_with_empty_users_list(self):
+        response = self.app.get('/api/v1/users', content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_user_details(self):
+        self.create_test_user()
+        response = self.app.get('/api/v1/user', headers = self.header, content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
     
+    def test_get_non_existing_user(self):
+        response = self.app.get('/api/v1/user', headers = self.header, content_type = 'application/json')
+        self.assertEqual(response.status_code, 404)
+
     def test_get_user_by_email(self):
-        user = {
-            "first_name": "Isaac",
-            "last_name": "Newton",
-            "email": "newsboy@gmail.com", 
-            "password": "password",
-        }
-        self.app.post("/api/v1/auth/signup",
-        data=json.dumps(user), content_type='application/json')
-        user = User(None,None,None,None)
+        self.create_test_user()
+        obj = User(None,None,None,None)
         Found = False
-        usr = user.get_user_by_email("newsboy@gmail.com")
+        usr = obj.get_user_by_email("newsboy@gmail.com")
         if usr:
             Found = True       
+        self.assertEqual(Found, True)        
+
+    def test_get_user_by_id(self):
+        self.create_test_user()
+        obj = User(None,None,None,None)
+        Found = False
+        result = obj.get_user_by_id(1)
+        if result:
+            Found = True       
         self.assertEqual(Found, True)
+    

@@ -1,5 +1,7 @@
+document.getElementById("register_form").addEventListener("submit", signup)
 function signup(e){
     e.preventDefault()
+    //prevents from submitting to a file
 
     let firstname = document.getElementById('first_name').value
     let lastname = document.getElementById('last_name').value
@@ -22,17 +24,11 @@ function signup(e){
       })
     .then(function(data) {
         if(data.message === "Account successfully created"){
-            window.location.href = "./home.html"
-        }
-        else{
-            document.getElementById('signup-response').innerHTML = data.message
-        }
-        //console.log(data)
-        
+        alert(data.message)
+        window.location.href = "./index.html"
+        } else{
+            document.getElementById('signup_response').innerHTML = "Error : " + data.message;
+        }        
     })
     .catch(error => console.log(error))
   }
-
-function test_log_something(){
-    console.log(12345)
-}

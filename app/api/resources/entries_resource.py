@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse
 from flask import jsonify, make_response
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import datetime
 from app.api.models.entries import Entry
 from app.api.resources.users_resource import UserLogin
@@ -18,15 +18,11 @@ class EntryResource(Resource):
         """ Method to retrieve a single entry of a user """
         ent = Entry(None, None, None)
         owner_id = get_jwt_identity()
-        if not owner_id:
-            return make_response(jsonify({
-                    'message': 'Token is missing.',
-                    }), 403)
         result = ent.get_single_entry_for_user(entry_id, owner_id)
         if not result:
             return make_response(jsonify({
                 'status': 'failed',
-                'message': 'Entry with this ID not found.',
+                'message': 'Entry not found.',
                 }), 404)
         else:
             entry= {"entry_id":result[0], "owner_id":result[1], "title":result[2], "description":result[3], "create_date":result[4]}
@@ -48,7 +44,7 @@ class EntryResource(Resource):
         if not result:
             return make_response(jsonify({
             'status': 'failed',
-            'message': 'Entry with this ID not found.',
+            'message': 'Entry not found.',
             }), 404)
         if result[4].strftime("%Y-%m-%d") == now.strftime("%Y-%m-%d"):
             if data["description"].strip() == "":
@@ -56,18 +52,18 @@ class EntryResource(Resource):
                     'status': 'failed',
                     'message': 'The new description can not be empty.'}), 400)
 
-            if len(data["description"].strip()) < 6:
+            if len(data["description"].strip()) < 4:
                 return make_response(jsonify({
                     'status': 'failed',
-                    'message': 'Description should be at least 6 characters long.'}), 400)
+                    'message': 'Description should be at least 4 characters long.'}), 400)
             ent.update_an_entry(entry_id, data['description'], owner_id)
             return make_response(jsonify({
                 'status': 'success',
-                'message': 'Entry edited successfully.',
+                'message': 'Entry edited successfully',
                 }), 200)
         return make_response(jsonify({
             'status': 'failed',
-            'message': 'You can only edit and entry on the day it was created!',
+            'message': 'You can only edit an entry on the day it was created. Alternatively, you can add a new entry',
             }), 401)    
 
     @jwt_required      
@@ -85,7 +81,7 @@ class EntryResource(Resource):
             ent.delete_an_entry(entry_id, owner_id)
             return make_response(jsonify({
             'status': 'success',
-            'message': 'Entry deleted.'
+            'message': 'Selected entry has been deleted'
             }), 200)        
     
 
@@ -107,7 +103,7 @@ class EntryListResource(Resource):
                 entries.append(entry)
             return make_response(jsonify({
                 'status': 'success',
-                'Entries': entries
+                'entries': entries
                 }), 200) 
 
 
@@ -132,15 +128,12 @@ class EntryListResource(Resource):
                 'status': "failed",
                 'message': 'Entry with same title already exists!',
                 }), 400)
-        else:
-            try:                
-                owner_id = get_jwt_identity()
-                entry = Entry(data['title'], data['description'], owner_id)
-                entry.add_an_entry()
-                return make_response(jsonify({
-                    'status': 'success',
-                    'message': 'Entry successfully created!',
-                }), 201)
-            except Exception as err:
-                return {'message': '{}'.format(err)}, 500
+                       
+        owner_id = get_jwt_identity()
+        entry = Entry(data['title'], data['description'], owner_id)
+        entry.add_an_entry()
+        return make_response(jsonify({
+            'status': 'success',
+            'message': 'Entry successfully created',
+        }), 201)
             
