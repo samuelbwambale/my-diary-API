@@ -108,11 +108,14 @@ class EntriesApiTestCase(BaseTestCase):
         response = self.app.get('/api/v1/entries', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
+    def test_get_entries_with_empty_entries_list(self):
+        response = self.app.get('/api/v1/entries', headers = self.header, content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+
     def test_get_a_single_entry(self):
         self.create_test_entry()
         response = self.app.get('/api/v1/entries/1', headers = self.header, content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
-
 
     def test_get_an_entry_not_in_list(self):
         response = self.app.get('/api/v1/entries/10', headers = self.header, content_type = 'application/json')

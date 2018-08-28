@@ -133,6 +133,10 @@ class UsersApiTestCase(BaseTestCase):
         response = self.app.get('/api/v1/users', content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
 
+    def test_get_all_users_with_empty_users_list(self):
+        response = self.app.get('/api/v1/users', content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+
     def test_get_user_details(self):
         self.create_test_user()
         response = self.app.get('/api/v1/user', headers = self.header, content_type = 'application/json')
