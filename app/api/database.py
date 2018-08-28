@@ -7,13 +7,17 @@ import os
 
 class DatabaseConnection:
     def __init__(self):
-        DATABASE_URL = os.getenv('DATABASE_URL', default=None)
+        # DATABASE_URL = os.getenv('DATABASE_URL', default=None)
         if app.config['TESTING']:
             self.connection = psycopg2.connect("dbname='testdb' user='postgres' password='postgres' host='localhost'")
-        elif DATABASE_URL is not None:
-            self.connection = psycopg2.connect(DATABASE_URL)
+        # elif DATABASE_URL is not None:
+        #     self.connection = psycopg2.connect(DATABASE_URL)
+        # else:
+        #     self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
         else:
-            self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
+            DATABASE_URL = 'postgres://hzcloqzitcowiq:f488646797582183b4fae69ae0a96123dabb2e2f221641f16d250e8d7b6f371e@ec2-50-16-196-138.compute-1.amazonaws.com:5432/d53gi9349a1dt1'
+            self.connection = psycopg2.connect(DATABASE_URL)
+
         self.connection.autocommit = True
         self.cursor = self.connection.cursor()
 
