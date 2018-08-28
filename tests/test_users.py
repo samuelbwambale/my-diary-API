@@ -53,6 +53,17 @@ class UsersApiTestCase(BaseTestCase):
         data=json.dumps(user), content_type='application/json')        
         self.assertEqual(response.status_code, 400)
 
+    def test_register_with_with_invalid_first_name(self):
+        user = {
+            "first_name": "Isaac",
+            "last_name": "Newton42",
+            "email": "newsboy@gmail.com", 
+            "password": "password",
+        }
+        response = self.app.post("/api/v1/auth/signup",
+        data=json.dumps(user), content_type='application/json')        
+        self.assertEqual(response.status_code, 400)
+
     def test_register_with_with_password_less_than_four_chars(self):
         user = {
             "first_name": "Isaac",
