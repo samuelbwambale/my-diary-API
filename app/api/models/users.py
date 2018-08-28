@@ -16,15 +16,12 @@ class User(DatabaseConnection):
     def add_user(self):
         """ Add a new user to the users table """
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)"
-        try:
-            self.cursor.execute(query,(
-                self.first_name, 
-                self.last_name, 
-                self.email, 
-                self.password))            
-        except psycopg2.Error as e:
-            print(e.pgerror)
-
+        self.cursor.execute(query,(
+            self.first_name, 
+            self.last_name, 
+            self.email, 
+            self.password))
+            
     
     def login_user(self, email, password):
         """ Get a user with this username and password """
