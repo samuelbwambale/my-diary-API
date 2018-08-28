@@ -7,7 +7,7 @@ import os
 
 class DatabaseConnection:
     def __init__(self):
-        if app.config['testing']:
+        if app.config['TESTING']:
             self.connection = psycopg2.connect("dbname='testdb' user='postgres' password='postgres' host='localhost'")
         # elif app.config['production']:
         #     self.connection = psycopg2.connect(DATABASE_URL)
