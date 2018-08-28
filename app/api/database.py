@@ -7,10 +7,9 @@ import os
 
 class DatabaseConnection:
     def __init__(self):
-        # DATABASE_URL = os.getenv('DATABASE_URL', default=None)
-        if app.config['TESTING']:
+        if app.config['testing']:
             self.connection = psycopg2.connect("dbname='testdb' user='postgres' password='postgres' host='localhost'")
-        # elif DATABASE_URL is not None:
+        # elif app.config['production']:
         #     self.connection = psycopg2.connect(DATABASE_URL)
         # else:
         #     self.connection = psycopg2.connect("dbname='mydiarydb' user='postgres' password='postgres' host='localhost'")
