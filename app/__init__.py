@@ -2,12 +2,17 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from config import config
 from flask_cors import CORS
+from app.api.database import DatabaseConnection
 
 
 app = Flask(__name__)
 """ Initialize the flask application """
 CORS(app)
 """ Enable CORS on the app """
+conn = DatabaseConnection()
+conn.create_table_users()
+conn.create_table_entries()
+conn.stop_connection()
 
 
 app.config.from_object(config['development'])
