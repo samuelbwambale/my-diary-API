@@ -21,9 +21,7 @@
                 document.getElementById('profile_output').innerHTML = profile_output
             }
             else if(data.message === "Internal Server Error"){
-                let res = "Please login to proceed"
-                alert(res)
-                window.location.href = "./index.html"        
+                sessionExpired()       
             } else {
                     document.getElementById('profile_response').innerHTML = data.message
                 }
