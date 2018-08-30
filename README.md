@@ -34,13 +34,11 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 * Install [Python](https://www.python.org/downloads/)
 * Run `pip install virtualenv` on command prompt
-* Run `pip install virtualenvwrapper` on command prompt
-* Run `export WORKON_HOME=~/Envs` on command prompt
-* Run `source /usr/local/bin/virtualenvwrapper.sh` on command prompt
-* Run `mkvirtualenv env-name` on command prompt
-* Run `workon env-name` on command prompt
-* Run `git clone` this repository and `cd` into the project root.
-* Run `pip install -r requirements.txt` on command prompt
+* Run `pip install virtualenvwrapper` 
+* Run `git clone` this repository and `cd` into the project root
+* Run `virtualenv -p /usr/bin/python3 venv-name` to create a virtual environment
+* `cd` into `venv-name` and run `source bin/activate` 
+* `cd ..` back to project root and run `pip install -r requirements.txt`
 
 ## Run the app
 
@@ -49,8 +47,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ## Tests
 
-* Run `pytest tests` on command prompt
-* Run `pytest --cov=. tests/` to get test coverage
+* Run `pytest --cov` to run the tests and get test coverage
 
 ### GitHub pages
 
