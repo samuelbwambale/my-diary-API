@@ -16,7 +16,7 @@ function update_an_entry(){
       method:'PUT',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'authorization':'Bearer '+sessionStorage.getItem('token')
+        'authorization':'Bearer '+token
       },
       body:JSON.stringify({
         description:description})
@@ -43,7 +43,7 @@ function get_entries(){
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => response.json())
@@ -77,7 +77,7 @@ function get_an_entry(id){
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => {
@@ -112,7 +112,7 @@ function delete_an_entry(id){
       method:'DELETE',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => {

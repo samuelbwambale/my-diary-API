@@ -9,7 +9,7 @@ function add_entry(e){
       method:'POST',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'authorization':'Bearer '+sessionStorage.getItem('token')
+        'authorization':'Bearer '+ token
       },
       body:JSON.stringify({
         title:title, 

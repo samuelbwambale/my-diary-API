@@ -27,8 +27,3 @@ function login(e){
     })
     .catch(error => console.log(error))
 }
-
-function logout() {
-	sessionStorage.removeItem('token');
-	window.location.href = './index.html';
-}
