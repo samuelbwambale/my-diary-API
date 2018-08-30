@@ -5,7 +5,7 @@ function login(e){
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
 
-    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+    fetch(url + blueprint +'/auth/login', {
       method:'POST',
       headers: {
         'Content-type':'application/json; charset=UTF-8'
