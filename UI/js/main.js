@@ -10,8 +10,10 @@ function sessionExpired() {
     window.location.href = "index.html"
 }
 
-if (token == null) {
-    sessionExpired()
+function checkToken() {
+        if (token == null) {
+        sessionExpired()
+    }
 }
 
 
