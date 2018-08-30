@@ -66,21 +66,27 @@ class UserLogin(Resource):
         data = parser.parse_args()
 
         usr = User(None, None,data['email'],data['password'] )
-        row = usr.login_user(data['email'], data['password'])
-        if row:
-            expires = timedelta(minutes=60)
-            user_id = row[0]
-            token = create_access_token(identity=user_id, expires_delta=expires)
-            
+        check = usr.get_user_by_email(data['email'])
+        if check != 0:
+            row = usr.login_user(data['email'], data['password'])
+            if row:
+                expires = timedelta(minutes=60)
+                user_id = row[0]
+                token = create_access_token(identity=user_id, expires_delta=expires)
+                
+                return make_response(jsonify({
+                    'status': "success",
+                    'message': "Successfully logged in",
+                    'token'  : token
+                    }), 200)
             return make_response(jsonify({
-                'status': "success",
-                'message': "Successfully logged in",
-                'token'  : token
-                }), 200)
+                'status': "failed",
+                'message': "Invalid username or password."
+                }), 401)
         return make_response(jsonify({
-            'status': "failed",
-            'message': "Invalid username or password."
-            }), 401)
+                'status': "failed",
+                'message': "No account registered with this email. Please signup"
+                }), 401)
                         
 
 class UserListResource(Resource):
