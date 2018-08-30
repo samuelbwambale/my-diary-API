@@ -12,7 +12,7 @@ function update_an_entry(){
     let id = document.getElementById('entryid').innerText;
     console.log(description)
     
-    fetch('http://127.0.0.1:5000/api/v1/entries/'+id, {
+    fetch(url + blueprint +'/entries/'+id, {
       method:'PUT',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
@@ -39,7 +39,7 @@ function update_an_entry(){
 
 function get_entries(){
 
-    fetch('http://127.0.0.1:5000/api/v1/entries', {
+    fetch(url + blueprint +'/entries', {
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
@@ -73,7 +73,7 @@ function get_entries(){
   }
 
 function get_an_entry(id){
-    fetch('http://127.0.0.1:5000/api/v1/entries/'+id, {
+    fetch(url + blueprint +'/entries/'+id, {
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
@@ -108,7 +108,7 @@ function get_an_entry(id){
 
 function delete_an_entry(id){
 
-    fetch('http://127.0.0.1:5000/api/v1/entries/'+id, {
+    fetch(url + blueprint +'/entries/'+id, {
       method:'DELETE',
       headers: {
         'Content-type':'application/json; charset=UTF-8',

@@ -1,6 +1,6 @@
 
   function get_user_profile(){
-    fetch('http://127.0.0.1:5000/api/v1/user', {
+    fetch(url + blueprint +'/user', {
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',

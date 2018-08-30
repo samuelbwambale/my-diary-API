@@ -5,7 +5,7 @@ function add_entry(e){
     let title = document.getElementById('title').value
     let description = document.getElementById('description').value
 
-    fetch('http://127.0.0.1:5000/api/v1/entries', {
+    fetch(url + blueprint +'/entries', {
       method:'POST',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
