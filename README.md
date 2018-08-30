@@ -5,6 +5,8 @@
 
 MyDiary is an online journal where users can pen down their thoughts and feelings. 
 
+View the user interface here: https://samuelbwambale.github.io/my_diary/UI
+
 ### Features
 1. Users can create an account and log in. 
 2. Users can view all entries to their diary. 
@@ -51,11 +53,11 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ### GitHub pages
 
-View the user interface here: https://samuelbwambale.github.io/my_diary/UI/home.html
+View the user interface here: https://samuelbwambale.github.io/my_diary/UI
 
 ### Heroku
 
-The app is accessible on Heroku here: https://sb-my-diary.herokuapp.com/
+The app is accessible on Heroku here: https://simple-app-my-diary.herokuapp.com/
 
 ### API Documentation
 
