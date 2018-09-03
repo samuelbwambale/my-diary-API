@@ -24,7 +24,6 @@ function signup(e){
       })
     .then(function(data) {
         if(data.message === "Account successfully created"){
-        alert(data.message)
         window.location.href = "./index.html"
         } else{
             document.getElementById('signup_response').innerHTML = "Error : " + data.message;
