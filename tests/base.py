@@ -12,7 +12,7 @@ class BaseTestCase(unittest.TestCase):
     
     def setUp(self):   
         """ Set up the test environment """
-        app.config['TESTING'] = True   
+        app.config.from_object(config['testing'])  
         DatabaseConnection.__init__(self)            
         self.app = app.test_client()
         with app.test_request_context():

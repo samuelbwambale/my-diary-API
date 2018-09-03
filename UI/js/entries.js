@@ -16,7 +16,7 @@ function update_an_entry(){
       method:'PUT',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'authorization':'Bearer '+sessionStorage.getItem('token')
+        'authorization':'Bearer '+token
       },
       body:JSON.stringify({
         description:description})
@@ -29,9 +29,7 @@ function update_an_entry(){
         alert(data.message)
         window.location.href = "./entries.html"
         } else if(data.message === "Internal Server Error"){
-          let res = "Please login to proceed"
-          alert(res)
-          window.location.href = "./index.html"        
+            sessionExpired()        
       } else{
             document.getElementById('view_entries_response').innerHTML = "Error : " + data.message;
         }        
@@ -45,7 +43,7 @@ function get_entries(){
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => response.json())
@@ -66,10 +64,7 @@ function get_entries(){
         document.getElementById('entries_output').innerHTML = entries_output
         }
         else if(data.message === "Internal Server Error"){
-            let res = "Please login to proceed"
-            alert(res)
-            window.location.href = "./index.html"
-
+            sessionExpired()
         } else {
             document.getElementById('view_entries_response').innerHTML = data.message
         }      
@@ -77,13 +72,12 @@ function get_entries(){
     .catch(error => console.log(error))
   }
 
-
 function get_an_entry(id){
     fetch('http://127.0.0.1:5000/api/v1/entries/'+id, {
       method:'GET',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => {
@@ -103,9 +97,7 @@ function get_an_entry(id){
                 document.getElementById('entries_output').innerHTML = entries_output
             }
             else if(data.message === "Internal Server Error"){
-                let res = "Please login to proceed"
-                alert(res)
-                window.location.href = "./index.html"        
+                sessionExpired()       
             } else {
                     document.getElementById('view_entries_response').innerHTML = data.message
                 }
@@ -120,7 +112,7 @@ function delete_an_entry(id){
       method:'DELETE',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'Authorization':'Bearer '+sessionStorage.getItem('token')
+        'Authorization':'Bearer '+ token
       }
     })
     .then(response => {
@@ -129,9 +121,7 @@ function delete_an_entry(id){
                 alert(data.message)
                 window.location.href = "./entries.html"
             } else if(data.message === "Internal Server Error"){
-                let res = "Please login to proceed"
-                alert(res)
-                window.location.href = "./index.html"        
+                sessionExpired()       
             } else{
                     document.getElementById('view_entries_response').innerHTML = data.message
                 }

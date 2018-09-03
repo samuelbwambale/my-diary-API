@@ -9,7 +9,7 @@ function add_entry(e){
       method:'POST',
       headers: {
         'Content-type':'application/json; charset=UTF-8',
-        'authorization':'Bearer '+sessionStorage.getItem('token')
+        'authorization':'Bearer '+ token
       },
       body:JSON.stringify({
         title:title, 
@@ -23,9 +23,7 @@ function add_entry(e){
         alert(data.message)
         window.location.href = "./entries.html"
         } else if(data.message === "Internal Server Error"){
-          let res = "Please login to proceed"
-          alert(res)
-          window.location.href = "./index.html"        
+          sessionExpired()       
       } else{
             document.getElementById('add_entry_response').innerHTML = "Error : " + data.message;
         }        
