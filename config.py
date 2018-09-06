@@ -8,12 +8,8 @@ class TestingConfig(Config):
 class DevelopmentConfig(Config):
     pass
 
-class ProductionConfig(Config):
-    DEBUG = False
-
-
 config  = {
     'testing': TestingConfig,
-    'development': DevelopmentConfig,
-    'production': ProductionConfig
-}
+    'development': DevelopmentConfig
+    }
+    
