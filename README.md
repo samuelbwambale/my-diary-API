@@ -38,9 +38,9 @@ View the user interface here: https://samuelbwambale.github.io/my_diary/UI
 * Run `pip install virtualenv` on command prompt
 * Run `pip install virtualenvwrapper` 
 * Run `git clone` this repository and `cd` into the project root
-* Run `virtualenv -p /usr/bin/python3 venv-name` to create a virtual environment
-* `cd` into `venv-name` and run `source bin/activate` 
-* `cd ..` back to project root and run `pip install -r requirements.txt`
+* Run `virtualenv venv-name -p python3.6` to create a virtual environment called `venv-name`
+* Run `source venv-name/bin/activate` 
+* Run `pip install -r requirements.txt` to install the dependencies
 
 ## Run the app
 
