@@ -58,7 +58,7 @@ View the user interface here: https://samuelbwambale.github.io/my_diary/UI/home.
 
 ### Heroku
 
-The app is accessible on Heroku here: https://sb-my-diary.herokuapp.com/
+The app is accessible on Heroku here: https://simple-app-my-diary-react.herokuapp.com/
 
 ### API Documentation
 
