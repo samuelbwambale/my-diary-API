@@ -54,11 +54,11 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 ### GitHub pages
 
-View the user interface here: https://samuelbwambale.github.io/my_diary/UI/home.html
+View the user interface here: https://samuelbwambale.github.io/my-diary-API/UI/
 
 ### Heroku
 
-The app is accessible on Heroku here: https://simple-app-my-diary-react.herokuapp.com/
+The app is accessible on Heroku here: https://simple-app-my-diary.herokuapp.com/
 
 ### API Documentation
 
