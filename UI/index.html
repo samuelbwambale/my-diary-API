@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Log In</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="topnav">
+            <a class="nav-link active" href="home.html">MyDiary</a>
+            <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                <a class="nav-link active" href="home.html">Home</a>
+                <a class="nav-link active" href="contact.html">Contact</a>
+            </div>
+        </nav>
+        <div>
+            <div class="bg-landingpage">
+                <div class="row justify-content-center ">
+                    <div class="col-sm-6 col-md-3">
+                        <form class="form-signin text-left mt-4" id="login_form" >
+                            <h2 class="h3 mb-3 font-weight-normal">Please log in</h2>
+                                <p style="color: firebrick;" id="login_response"></p>
+                                Email address<br>
+                                <input type="email" id="email" placeholder="Enter email address" autocomplete="email" required>
+                                Password<br>
+                                <input type="password" id="password" placeholder="Enter password" autocomplete="password" required>
+                                
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" value="remember-me"> Remember me
+                                    </label>
+                                </div>
+                                <button id="login_submit" class="btn" type="submit" >Log in</button>
+                                <div style="text-align: center">
+                                    Have no account? <a href="signup.html">Sign up</a>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="mt-5 mb-3 text-muted text-center">&copy; sbwambale </p>
+            </div>
+        </footer>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="get_user_profile()">
+    <div class="container-fluid">
+        <nav class="topnav">
+            <a class="nav-link active" href="home.html">MyDiary</a>
+            <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                <a class="nav-link active" href="home.html">Home</a>
+                <a class="nav-link active" href="entries.html">Entries</a>
+                <a class="nav-link active" onclick="logout()" href="#">Sign Out</a>
+            </div>
+        </nav>        
+        <div class="bg-landingpage">
+            <div class="row justify-content-center ">
+                <div class="col-sm-8 col-md-4">                            
+                        <form class="card" id="profile_form">
+                            <p style="color: firebrick;" id="profile_response"></p> 
+                            <h2 class="h3 mb-3 font-weight-normal">My Profile</h2>
+                            <img src="./images/default-profile-pic.jpg" alt="profile picture" style="height:10%"> 
+                            <div id="profile_output"></div>                                      
+                            <a href="add-entry.html"><button class="btn mt-3">Add New Entry</button></a>
+                        </form>
+                        
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    <script src="js/user-profile.js"></script>
+</body>
+</html>

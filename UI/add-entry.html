@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Contact</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="topnav">
+            <a class="nav-link active" href="home.html">MyDiary</a>
+            <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                <a class="nav-link active" href="home.html">Home</a>
+                <a class="nav-link active" href="entries.html">Entries</a>
+                <a class="nav-link active" onclick="logout()">Sign Out</a>
+            </div>
+        </nav>
+        <div>
+            <div class="bg-landingpage">
+                <div class="row justify-content-center ">
+                    <div class="col-sm-6 col-md-6">
+                        <h2 class="h3 mt-3 font-weight-normal">Add a diary entry</h1>
+                            <form class="form-contact text-left mt-3" id="add_entry_form">
+                                <p style="color: firebrick;" id="add_entry_response"></p> 
+                                Title<br>
+                                <input type="text" id="title"  placeholder="Enter the title of your dairy entry" required>
+                                Description<br>
+                                <textarea id="description" placeholder="Enter the diary entry details" required></textarea>        
+                                <div style="text-align: center">
+                                    <button class="btn btn-cancel-entry" onclick="window.location='./entries.html'">Cancel</button>
+                                    <button type="submit" class="btn btn-submit">Submit</button>
+                               </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="mt-5 mb-3 text-muted text-center">&copy; sbwambale </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/add-entry.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

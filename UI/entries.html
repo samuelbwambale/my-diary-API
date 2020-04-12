@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Set Menu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="get_entries()">
+    <script src="js/entries.js"></script>
+    <div class="container-fluid">
+            <nav class="topnav">
+                <a class="nav-link active" href="home.html">MyDiary</a>
+                <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                    <a class="nav-link active" href="home.html">Home</a>
+                    <a class="nav-link active" href="add-entry.html">Add Entry</a>
+                    <a class="nav-link active" href="user-profile.html">Profile</a>
+                </div>
+            </nav>
+
+        <div class="container-fluid">
+            <div class="bg-landingpage">
+                <div class="row justify-content-center ">
+                    <div class="col-sm-4 col-md-4" id="all_entries_div">
+                        <p style="color: firebrick;" class="mt-5" id="view_entries_response"></p> 
+                        <div id="entries_output"></div>
+                        <!-- <ul id="previous-entries">
+                            <li class="floating-box">
+                                    <label style="font-weight: bold">My 30th birthday celebration ...</label>
+                                    <div>
+                                        <button class="btn-edit">View</button>
+                                        <button class="btn-delete-entry">Delete</button>
+                                    </div>
+                            </li>
+                        </ul> -->
+                        <a href="add-entry.html"><button class="btn mt-3">Add New Entry</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+    
+</body>
+</html>

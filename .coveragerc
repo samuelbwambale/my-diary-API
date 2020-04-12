@@ -1,0 +1,8 @@
+[run]
+
+[report]
+omit = app.py
+    */__init__.py 
+    venv/*
+    tests/*
+
